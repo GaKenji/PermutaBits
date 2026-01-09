@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/CinzaEscuro"
+    tools:context=".ui.baseNumerica.BaseNumericaFragment">
+
+    <TextView
+        android:id="@+id/textIncicaSelecioneAsUnidades"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/amarante"
+        android:gravity="center"
+        android:text="Selecione as unidades"
+        android:textColor="@color/AzulClaro"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"/>
+
+
+    <Spinner
+        android:id="@+id/spinnerConversaoNumerica1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textIncicaSelecioneAsUnidades"
+        android:layout_marginTop="48dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerConversaoNumerica2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerConversaoNumerica1"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextInputBaseNumerica"
+        android:layout_width="150dp"
+        android:layout_height="24dp"
+        app:layout_constraintEnd_toStartOf="@id/buttonConverterBaseNumerica"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerConversaoNumerica2"
+        android:layout_marginTop="24dp"
+        android:hint="Valor..."
+        android:textColorHint="@color/CianoEscuro"
+        android:textSize="16dp"
+        android:textColor="@color/CianoEscuro"
+        android:inputType="number"
+        android:textStyle="bold"
+        android:background="@color/white"
+        android:fontFamily="@font/amarante"/>
+
+
+    <Button
+        android:id="@+id/buttonConverterBaseNumerica"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/CianoClaro"
+        android:fontFamily="@font/anton"
+        android:text="Converter"
+        android:textColor="@color/CinzaEscuro"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/editTextInputBaseNumerica"
+        app:layout_constraintTop_toBottomOf="@id/spinnerConversaoNumerica2"/>
+
+    <View
+        android:id="@+id/viewDivisoria"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonConverterBaseNumerica"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/degrade_background_spinner"/>
+
+    <TextView
+        android:id="@+id/textViewMostraResultado"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewDivisoria"
+        android:layout_marginTop="24dp"
+        android:hint="Resultado..."
+        android:textColorHint="@color/CianoEscuro"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/CianoEscuro"
+        android:background="@color/white"/>
+
+
+    <TextView
+        android:id="@+id/textSoluao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewMostraResultado"
+        android:layout_marginTop="16dp"
+        android:text="Solução"
+        android:textColor="@color/AzulClaro"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/amarante"/>
+
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="250dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSoluao"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
