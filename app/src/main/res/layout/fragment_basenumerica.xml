@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/CinzaEscuro"
-    tools:context=".ui.baseNumerica.BaseNumericaFragment">
+    tools:context=".ui.baseNumerica.BaseNumericaFragment"
+    android:id="@+id/fragmentBaseNumerica">
 
     <TextView
         android:id="@+id/textIncicaSelecioneAsUnidades"
@@ -54,7 +55,6 @@
         android:textColorHint="@color/CianoEscuro"
         android:textSize="16dp"
         android:textColor="@color/CianoEscuro"
-        android:inputType="number"
         android:textStyle="bold"
         android:background="@color/white"
         android:fontFamily="@font/amarante"/>
@@ -87,7 +87,7 @@
 
     <TextView
         android:id="@+id/textViewMostraResultado"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

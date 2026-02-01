@@ -10,4 +10,25 @@
     <string name="menu_BaseNumerica">Bases numéricas</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string-array name="bases_numericas_origem">
+        <item>De...</item>
+        <item>Binário</item>
+        <item>Octal</item>
+        <item>Decimal</item>
+        <item>Hexadecimal</item>
+    </string-array>
+
+    <string-array name="bases_numericas_destino">
+        <item>Para...</item>
+        <item>Binário</item>
+        <item>Octal</item>
+        <item>Decimal</item>
+        <item>Hexadecimal</item>
+    </string-array>
+
+    <string name="alerta_inserir_valor">❌ Insira um valor!</string>
+    <string name="alerta_selecionar_bases">❌ Selecione as bases numéricas!</string>
+    <string name="alerta_valor_invalido">❌ Valor inválido!</string>
+    <string name="entendi">Ok, endendi!</string>
 </resources>
