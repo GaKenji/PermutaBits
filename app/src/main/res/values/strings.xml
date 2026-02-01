@@ -31,4 +31,9 @@
     <string name="alerta_selecionar_bases">❌ Selecione as bases numéricas!</string>
     <string name="alerta_valor_invalido">❌ Valor inválido!</string>
     <string name="entendi">Ok, endendi!</string>
+
+    <string name="Converter">Converter</string>
+    <string name="resultado">Resultado</string>
+
+    <string name="input_value">Valor de entrada</string>
 </resources>

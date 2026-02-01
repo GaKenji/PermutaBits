@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.permutabittools.R
 import com.example.permutabittools.databinding.FragmentBasenumericaBinding
@@ -36,7 +37,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadSpinners() //Carrega o conteúdo dos spinners
+        carregarSpinners() //Carrega o conteúdo dos spinners
 
         //Tratamento da seleção de itens do spinner de origem
         binding.spinnerConversaoNumerica1.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
@@ -92,7 +93,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
         }
     }
 
-    private fun loadSpinners(){
+    private fun carregarSpinners(){
         //Prenche listas de valores que serão colocados nos spinners
         //Os valores colocados estão descritos em strings.xml
         val lista1 = resources.getStringArray(R.array.bases_numericas_origem).toList()
@@ -126,6 +127,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
             val decimal = paraDecimal()//Converte o valor primeiro para decimal
             val resultado = deDecimal(decimal)//Depois converte o valor para a base desejada
             binding.textViewMostraResultado.setText(resultado)
+            binding.txtResultado.boxStrokeColor = ContextCompat.getColor(requireContext(), R.color.CianoClaro)
         }catch (e: Exception){
             alerta(getString(R.string.alerta_valor_invalido))
             //alerta chamado para quando o usuário digitar uma entrada inválida
