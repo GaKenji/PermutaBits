@@ -2,147 +2,226 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentBaseNumerica"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/CinzaEscuro"
-    tools:context=".ui.baseNumerica.BaseNumericaFragment"
-    android:id="@+id/fragmentBaseNumerica">
+    android:background="@drawable/background_fragment_bases_numericas"
+    tools:context=".ui.baseNumerica.BaseNumericaFragment">
 
 
-    <Spinner
-        android:id="@+id/spinnerConversaoNumerica1"
-        android:layout_width="300dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputDropDownEntrada"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="48dp"/>
+        android:layout_marginTop="48dp"
+        android:hint="De..."
 
-    <Spinner
-        android:id="@+id/spinnerConversaoNumerica2"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/box_stroke_color"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:endIconMode="dropdown_menu"
+        app:endIconTint="@color/CianoClaro"
+        app:hintTextColor="@color/CianoClaro"
+        android:textColorHint="@color/white"
+
+        app:layout_constraintEnd_toStartOf="@id/textInputDropDownSaida"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/exposedDropDownInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:inputType="none"
+            android:textColor="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputDropDownSaida"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:hint="Para..."
+
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/box_stroke_color"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:endIconMode="dropdown_menu"
+        app:endIconTint="@color/CianoClaro"
+        app:hintTextColor="@color/CianoClaro"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/textInputDropDownEntrada"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinnerConversaoNumerica1"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toEndOf="@id/textInputDropDownEntrada"
+        app:layout_constraintTop_toTopOf="@id/textInputDropDownEntrada">
+
+        <AutoCompleteTextView
+            android:id="@+id/exposedDropDownOutput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:inputType="none"
+            android:textColor="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtInput"
-        android:layout_width="150dp"
+        android:layout_width="225dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/buttonConverterBaseNumerica"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinnerConversaoNumerica2"
         android:layout_marginTop="24dp"
         android:hint="@string/input_value"
-        app:hintTextColor="@color/CianoClaro"
-        android:textColorHint="@color/CianoClaro"
+        android:textColorHint="@color/white"
+        app:boxBackgroundColor="@android:color/transparent"
         app:boxBackgroundMode="outline"
-        app:boxStrokeColor="@color/CianoClaro"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxStrokeColor="@color/box_stroke_color"
         app:boxStrokeWidth="1dp"
         app:boxStrokeWidthFocused="2dp"
-        app:boxBackgroundColor="@android:color/transparent"
-        app:boxCollapsedPaddingTop="4dp">
+        app:hintTextColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/buttonConverterBaseNumerica"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputDropDownSaida">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextInputBaseNumerica"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/CianoClaro"
             android:gravity="center_vertical"
+            android:inputType="text"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
+            android:textColor="@color/white"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:inputType="text" />
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonConverterBaseNumerica"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="4dp"
         android:text="@string/Converter"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
-
-        app:cornerRadius="12dp"
         app:backgroundTint="@color/CianoEscuro"
-        app:rippleColor="@color/AzulEscuro"
-
-        app:layout_constraintTop_toTopOf="@id/txtInput"
+        app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="@id/txtInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/txtInput"
-        android:layout_marginTop="6dp"/>
+        app:layout_constraintTop_toTopOf="@id/txtInput"
+        app:rippleColor="@color/AzulEscuro" />
 
     <View
         android:id="@+id/viewDivisoria"
-        android:layout_width="300dp"
-        android:layout_height="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonConverterBaseNumerica"
+        android:layout_width="350dp"
+        android:layout_height="2dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/degrade_background_spinner"/>
+        android:background="@drawable/degrade_background_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonConverterBaseNumerica" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtResultado"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:hint="@string/resultado"
-        app:hintTextColor="@color/CianoClaro"
-        android:textColorHint="@color/CianoClaro"
+        android:textColorHint="@color/white"
+
+        app:boxBackgroundColor="@android:color/transparent"
         app:boxBackgroundMode="outline"
-        app:boxStrokeColor="@color/CianoClaro"
+        app:boxCollapsedPaddingTop="4dp"
+
+        app:boxStrokeColor="@color/box_stroke_color"
         app:boxStrokeWidth="1dp"
         app:boxStrokeWidthFocused="2dp"
-        app:boxBackgroundColor="@android:color/transparent"
-        app:boxCollapsedPaddingTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/viewDivisoria"
-        app:layout_constraintStart_toStartOf="parent"
+        app:hintTextColor="@color/white"
+
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewDivisoria"
+        app:layout_constraintBottom_toTopOf="@id/textHistorico">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textViewMostraResultado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="false"
             android:clickable="false"
             android:cursorVisible="false"
-            android:textColor="@color/CianoClaro"
-            android:textStyle="bold"
-            android:textSize="14sp"
+            android:focusable="false"
             android:gravity="center_vertical"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp"/>
+            android:paddingBottom="8dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <TextView
-        android:id="@+id/textSoluao"
+        android:id="@+id/textHistorico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtResultado"
-        android:layout_marginTop="16dp"
-        android:text="Solução"
-        android:textColor="@color/AzulClaro"
-        android:textSize="18dp"
+        android:text="@string/Historico"
+        android:textColor="@color/CianoClaro"
+        android:textSize="16dp"
         android:textStyle="bold"
-        android:fontFamily="@font/amarante"/>
+        android:layout_marginTop="84dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewDivisoria"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerHistoricoBasesNumericas"
+        android:layout_width="350dp"
+        android:layout_height="223dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textHistorico"
+        app:layout_constraintBottom_toTopOf="@id/buttonApagarHistorico" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonApagarHistorico"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginBottom="64dp"
+        android:text="@string/apagar_Histótico"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/AzulClaro"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerHistoricoBasesNumericas"
+        app:rippleColor="@color/AzulEscuro" />
+
 
     <TextView
-        android:layout_width="350dp"
-        android:layout_height="250dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textSoluao"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"/>
+        android:id="@+id/txtListaVazia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/textHistorico"
+        app:layout_constraintEnd_toEndOf="@id/textHistorico"
+        app:layout_constraintTop_toBottomOf="@id/textHistorico"
+        android:text="@string/lista_vazia"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

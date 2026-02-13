@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Focado -->
+    <item android:state_focused="true"
+        android:color="@color/CianoClaro" />
+
+    <!-- Ativado (dropdown aberto) -->
+    <item android:state_activated="true"
+        android:color="@color/CianoClaro" />
+
+    <!-- Estado normal -->
+    <item android:color="@color/CianoClaro" />
+
+    <!--XML usado como ColorStateList para ser aplicado nas bordas dos InputTextViews
+        Será usado no  app:boxStrokeColor="@color/box_stroke_color-->
+</selector>

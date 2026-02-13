@@ -7,15 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.permutabittools.R
 import com.example.permutabittools.databinding.FragmentBasenumericaBinding
 import com.example.permutabittools.adapters.AdapterSpinnerNumericBase
+import com.example.permutabittools.adapters.HIstoricoAdapter
+import com.example.permutabittools.util.Conversoes
 import com.example.permutabittools.util.NumericBase
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.serialization.StringFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class BaseNumericaFragment : Fragment(), View.OnClickListener{
 
@@ -24,12 +31,9 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
     private var baseOrigem: NumericBase? = null
     private var baseDestino: NumericBase? = null
     private lateinit var valor: String
+    private val historicoAdapter: HIstoricoAdapter = HIstoricoAdapter()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentBasenumericaBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
@@ -37,36 +41,38 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        carregarSpinners() //Carrega o conteúdo dos spinners
 
-        //Tratamento da seleção de itens do spinner de origem
-        binding.spinnerConversaoNumerica1.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                baseOrigem = mapearBases(position)
-            }
+        carregarExposedDropDowns() //Carrega o conteúdo dos spinners
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        binding.recyclerHistoricoBasesNumericas.layoutManager = LinearLayoutManager(context)
+        binding.recyclerHistoricoBasesNumericas.adapter = historicoAdapter
+
+        //Tratamento da seleção de itens do Exposed DropDown de origem
+        binding.exposedDropDownInput.setOnItemClickListener { parent, _, position, _ ->
+            val selecionado = parent.getItemAtPosition(position).toString()
+            baseOrigem = mapearBases(selecionado)
         }
 
-        //Tratamento da seleção de itens do spinner de destino
-        binding.spinnerConversaoNumerica2.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                baseDestino = mapearBases(position)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        //Tratamento da seleção de itens do Exposed DropDown de Destino
+        binding.exposedDropDownOutput.setOnItemClickListener { parent, _, position, _ ->
+            val selecionado = parent.getItemAtPosition(position).toString()
+            baseDestino = mapearBases(selecionado)
         }
+
+        alterarVisibilidadeReCyclerView()
         binding.buttonConverterBaseNumerica.setOnClickListener(this)//captação do evento de click do botão converter
+    }
+
+    override fun onResume() {
+        //Método necesário para recarregar os exposed DropDowns assim que o usuário retornar à essa fragment
+        super.onResume()
+        carregarExposedDropDowns()//Recarrega os Exposed DropDowns ao voltar para a fragment
+
+        binding.exposedDropDownInput.setText("", false)//false ajuda a evitar o disparo do OnItemClickListener
+        binding.exposedDropDownOutput.setText("", false)
+
+        baseOrigem = null
+        baseDestino = null
     }
 
     override fun onDestroyView() {
@@ -89,33 +95,36 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
                 }
 
                 else converter()
+                esconderTeclado()
             }
         }
     }
 
-    private fun carregarSpinners(){
+    private fun carregarExposedDropDowns(){
         //Prenche listas de valores que serão colocados nos spinners
         //Os valores colocados estão descritos em strings.xml
-        val lista1 = resources.getStringArray(R.array.bases_numericas_origem).toList()
-        val lista2 = resources.getStringArray(R.array.bases_numericas_destino).toList()
+        val lista1 = resources.getStringArray(R.array.bases_numericas).toList()
+        val lista2 = resources.getStringArray(R.array.bases_numericas).toList()
 
         //Uso de um adapter para criar um spinner personalizado
         //Requer o contexto e a lista de valores que preencherão os spinners
-        val adapter1 = AdapterSpinnerNumericBase(requireContext(), lista1)
-        val adapter2 = AdapterSpinnerNumericBase(requireContext(), lista2)
+        val adapter1 = ArrayAdapter(requireContext(), R.layout.spinner_item,lista1)
+        val adapter2 = ArrayAdapter(requireContext(), R.layout.spinner_item,lista2)
 
         //preenche os spinners depois de obtermos o adapter
-        binding.spinnerConversaoNumerica1.adapter = adapter1
-        binding.spinnerConversaoNumerica2.adapter = adapter2
+        binding.exposedDropDownInput.setAdapter(adapter1)
+        binding.exposedDropDownOutput.setAdapter(adapter2)
     }
 
-    private fun mapearBases(position: Int): NumericBase?{
+    private fun mapearBases(select: String): NumericBase?{
         //Mapeamento das bases numéricas para os spinners
-        return when(position){
-            1-> NumericBase.BINARIO
-            2-> NumericBase.OCTAL
-            3-> NumericBase.DECIMAL
-            4-> NumericBase.HEXADECIMAL
+        //Trata os itens que podem ser clicados
+        //Descarta a acão do click do primeiro item "De..." e "Para..."
+        return when(select){
+            "Binário" -> NumericBase.BINARIO
+            "Octal" -> NumericBase.OCTAL
+            "Decimal" -> NumericBase.DECIMAL
+            "Hexadecimal" -> NumericBase.HEXADECIMAL
             else -> null
         }
     }
@@ -127,7 +136,18 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
             val decimal = paraDecimal()//Converte o valor primeiro para decimal
             val resultado = deDecimal(decimal)//Depois converte o valor para a base desejada
             binding.textViewMostraResultado.setText(resultado)
-            binding.txtResultado.boxStrokeColor = ContextCompat.getColor(requireContext(), R.color.CianoClaro)
+
+            //Pega a data e a hora que a conversão foi feita
+            val dataHora = LocalDateTime.now()
+            val data = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+            val hora = dataHora.format(DateTimeFormatter.ofPattern("HH:mm"))
+
+            //Instancia a conversao com os valores utilizados nela
+            val conversao = Conversoes(baseOrigem!!.name, baseDestino!!.name, valor, resultado, data, hora)
+            historicoAdapter.adicionarConversoes(conversao)//adiciona a conversão a lista do adapter
+            alterarVisibilidadeReCyclerView()
+            binding.recyclerHistoricoBasesNumericas.smoothScrollToPosition(0)
+
         }catch (e: Exception){
             alerta(getString(R.string.alerta_valor_invalido))
             //alerta chamado para quando o usuário digitar uma entrada inválida
@@ -165,4 +185,26 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
             NumericBase.HEXADECIMAL -> dcimal.toString(16).uppercase()
         }
     }
+
+    private fun esconderTeclado(){
+        val imm = requireContext().getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+        requireActivity().currentFocus?.let {
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
+            it.clearFocus()
+        }
+    }
+
+    private fun alterarVisibilidadeReCyclerView(){
+        if (historicoAdapter.itemCount == 0){
+            binding.txtListaVazia.visibility = View.VISIBLE
+            binding.recyclerHistoricoBasesNumericas.visibility = View.GONE
+            binding.buttonApagarHistorico.visibility = View.GONE
+        }
+        else{
+            binding.txtListaVazia.visibility = View.GONE
+            binding.recyclerHistoricoBasesNumericas.visibility = View.VISIBLE
+            binding.buttonApagarHistorico.visibility = View.VISIBLE
+        }
+    }
+
 }

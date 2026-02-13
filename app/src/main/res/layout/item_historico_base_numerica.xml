@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/CinzaEscuro"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textHistoricoBaseOrigem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/textHistoricoValorEntrada"
+        app:layout_constraintEnd_toStartOf="@id/imgArrow"
+        android:layout_marginStart="16sp"
+        android:text="Base De Origem"
+        android:textSize="14dp"
+        android:textColor="@color/CianoClaro"/>
+
+    <TextView
+        android:id="@+id/textHistoricoValorEntrada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/textHistoricoBaseOrigem"
+        app:layout_constraintTop_toBottomOf="@id/textHistoricoBaseOrigem"
+        app:layout_constraintBottom_toTopOf="@id/viewRecycler"
+        app:layout_constraintEnd_toEndOf="@id/textHistoricoBaseOrigem"
+        android:layout_marginBottom="20dp"
+        android:text="Valor: 12"
+        android:textSize="12dp"
+        android:textColor="@color/white"/>
+
+    <ImageView
+        android:id="@+id/imgArrow"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@id/textHistoricoBaseOrigem"
+        app:layout_constraintEnd_toStartOf="@id/textHistoricoBaseDestino"
+        app:layout_constraintTop_toTopOf="@id/textHistoricoBaseOrigem"
+        app:layout_constraintBottom_toBottomOf="@id/textHistoricoValorEntrada"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/arrow"/>
+
+
+    <TextView
+        android:id="@+id/textHistoricoBaseDestino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/imgArrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/textHistoricoValorSaida"
+        app:layout_constraintEnd_toStartOf="@id/textHistoricoData"
+        android:layout_marginStart="16dp"
+        android:text="Base De Destino"
+        android:textSize="14dp"
+        android:textColor="@color/CianoClaro"/>
+
+    <TextView
+        android:id="@+id/textHistoricoValorSaida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/textHistoricoBaseDestino"
+        app:layout_constraintTop_toBottomOf="@id/textHistoricoBaseDestino"
+        app:layout_constraintBottom_toTopOf="@id/viewRecycler"
+        app:layout_constraintEnd_toEndOf="@id/textHistoricoBaseDestino"
+        android:layout_marginBottom="20dp"
+        android:text="Valor: 12"
+        android:textSize="12dp"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/textHistoricoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/textHistoricoBaseDestino"
+        app:layout_constraintTop_toTopOf="@id/textHistoricoBaseDestino"
+        app:layout_constraintBottom_toTopOf="@id/textHistoricoHora"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="01/11/98"
+        android:textSize="10dp"
+        android:textColor="@color/CianoClaro"/>
+
+    <TextView
+        android:id="@+id/textHistoricoHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/textHistoricoData"
+        app:layout_constraintTop_toBottomOf="@id/textHistoricoData"
+        app:layout_constraintBottom_toBottomOf="@id/textHistoricoValorSaida"
+        app:layout_constraintEnd_toEndOf="@id/textHistoricoData"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:text="12:00"
+        android:textSize="10dp"
+        android:textColor="@color/white"/>
+
+    <View
+        android:id="@+id/viewRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/degrade_background_spinner"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
