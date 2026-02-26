@@ -11,7 +11,7 @@ class HistoricoViewHolder(private val item: ItemHistoricoBaseNumericaBinding): R
         item.textHistoricoBaseOrigem.text = listaConversoes.baseOrigem
         item.textHistoricoValorEntrada.text = listaConversoes.valorEntrada
         item.textHistoricoBaseDestino.text = listaConversoes.baseDestino
-        item.textHistoricoValorSaida.text = listaConversoes.valorSaída
+        item.textHistoricoValorSaida.text = listaConversoes.valorSaida
         item.textHistoricoData.text = listaConversoes.data
         item.textHistoricoHora.text = listaConversoes.hora
     }

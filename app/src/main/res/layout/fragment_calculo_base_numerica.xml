@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.calculoBaseNumerica.CalculoBaseNumerica"
+    android:background="@color/CinzaEscuro">
+
+    <View
+        android:id="@+id/View"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/CianoEscuro"/>
+
+    <TextView
+        android:id="@+id/textInformaBaseEntrada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/View"
+        app:layout_constraintEnd_toStartOf="@id/imgSeta"
+        app:layout_constraintTop_toTopOf="@id/imgSeta"
+        app:layout_constraintBottom_toTopOf="@id/txtInformaValorEndrada"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="14dp"/>
+
+    <TextView
+        android:id="@+id/txtInformaValorEndrada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/textInformaBaseEntrada"
+        app:layout_constraintEnd_toEndOf="@id/textInformaBaseEntrada"
+        app:layout_constraintBottom_toBottomOf="@id/imgSeta"
+        app:layout_constraintTop_toBottomOf="@id/textInformaBaseEntrada"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="12dp"/>
+
+    <ImageView
+        android:id="@+id/imgSeta"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@id/textInformaBaseEntrada"
+        app:layout_constraintEnd_toStartOf="@id/textInformaBaseSaida"
+        app:layout_constraintTop_toTopOf="@id/View"
+        app:layout_constraintBottom_toBottomOf="@id/View"
+        android:src="@drawable/arrow"/>
+
+    <TextView
+        android:id="@+id/textInformaBaseSaida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/imgSeta"
+        app:layout_constraintEnd_toEndOf="@id/View"
+        app:layout_constraintTop_toTopOf="@id/imgSeta"
+        app:layout_constraintBottom_toTopOf="@id/textInformaValorSaida"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="14dp"/>
+
+
+    <TextView
+        android:id="@+id/textInformaValorSaida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/textInformaBaseSaida"
+        app:layout_constraintEnd_toEndOf="@id/textInformaBaseSaida"
+        app:layout_constraintTop_toBottomOf="@id/textInformaBaseSaida"
+        app:layout_constraintBottom_toBottomOf="@id/imgSeta"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="12dp"/>
+
+    <View
+        android:id="@+id/viewDivide"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/View"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/degrade_background_spinner"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrowViewPassoAPasso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/viewDivide"
+        app:layout_constraintBottom_toTopOf="@id/buttonCopiar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/txtPassoapasso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"/>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonCopiar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nestedScrowViewPassoAPasso"
+        android:text="@string/copiar"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/AzulClaro"
+        app:cornerRadius="12dp"
+        app:rippleColor="@color/Azul"
+        android:textAllCaps="false"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

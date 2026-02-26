@@ -1,4 +1,4 @@
-package com.example.permutabittools.adapters
+package com.example.permutabittools.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import com.example.permutabittools.databinding.ItemHistoricoBaseNumericaBinding
 import com.example.permutabittools.util.Conversoes
 import com.example.permutabittools.util.HistoricoViewHolder
 
-class HIstoricoAdapter: RecyclerView.Adapter<HistoricoViewHolder>(){
+class HIstoricoAdapter(private val onItemClick: (Conversoes) -> Unit): RecyclerView.Adapter<HistoricoViewHolder>(){
 
     private val listaConversoes = mutableListOf<Conversoes>()
 
@@ -23,6 +23,7 @@ class HIstoricoAdapter: RecyclerView.Adapter<HistoricoViewHolder>(){
     override fun onBindViewHolder(holder: HistoricoViewHolder, position: Int) {
         //Atribui valores para os elementos de layout
         holder.bind(listaConversoes[position])
+        holder.itemView.setOnClickListener { onItemClick(listaConversoes[position]) }
     }
 
     override fun getItemCount(): Int {

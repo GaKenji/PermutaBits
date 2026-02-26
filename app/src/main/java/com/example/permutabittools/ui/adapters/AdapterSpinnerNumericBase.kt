@@ -1,4 +1,4 @@
-package com.example.permutabittools.adapters
+package com.example.permutabittools.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.example.permutabittools.R
 
-class AdapterSpinnerNumericBase(context: Context, private val spinnerItens: List<String>): ArrayAdapter<String> (context, 0, spinnerItens){
+class AdapterSpinnerNumericBase(context: Context, private val spinnerItens: List<String>): ArrayAdapter<String>(context, 0, spinnerItens){
 
    /*override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return createView(position, convertView, parent)

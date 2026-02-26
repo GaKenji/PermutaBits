@@ -3,13 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_basesNumericas">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_basesNumericas"
         android:name="com.example.permutabittools.ui.baseNumerica.BaseNumericaFragment"
         android:label="@string/menu_BaseNumerica"
-        tools:layout="@layout/fragment_basenumerica" />
+        tools:layout="@layout/fragment_basenumerica">
+
+        <action
+            android:id="@+id/action_nav_basesNumericas_to_nav_calculoBasesNumericas"
+            app:destination="@id/nav_calculoBasesNumericas"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -22,4 +28,10 @@
         android:name="com.example.permutabittools.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_calculoBasesNumericas"
+        android:name="com.example.permutabittools.ui.calculoBaseNumerica.CalculoBaseNumerica"
+        android:label="@string/menu_CalculoBaseNumerica"
+        tools:layout="@layout/fragment_calculo_base_numerica"/>
 </navigation>

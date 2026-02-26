@@ -7,16 +7,17 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_BaseNumerica">Bases numéricas</string>
+    <string name="menu_CalculoBaseNumerica">Cálculo de conversão</string>
     <string name="menu_gallery">Em desenvolvimento...</string>
     <string name="menu_slideshow">Em desenvolvomento...</string>
 
+    <!--Fragment bases numericas-->
     <string-array name="bases_numericas">
         <item>Binário</item>
         <item>Octal</item>
         <item>Decimal</item>
         <item>Hexadecimal</item>
     </string-array>
-
 
     <string name="alerta_inserir_valor">❌ Insira um valor!</string>
     <string name="alerta_selecionar_bases">❌ Selecione as bases numéricas!</string>
@@ -30,5 +31,10 @@
     <string name="Historico">Histórico de conversões</string>
     <string name="lista_vazia">Nenhuma conversão realizada ainda!</string>
 
+    <!--Fragment passo a passo de bases numericas-->
+    <string name="copiar">Copiar</string>
+
     <string name="input_value">Valor de entrada</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

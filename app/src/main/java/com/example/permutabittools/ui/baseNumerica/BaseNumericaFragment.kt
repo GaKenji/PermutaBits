@@ -1,26 +1,19 @@
 package com.example.permutabittools.ui.baseNumerica
 
-import android.graphics.Color
-import android.graphics.LightingColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
-import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.permutabittools.R
 import com.example.permutabittools.databinding.FragmentBasenumericaBinding
-import com.example.permutabittools.adapters.AdapterSpinnerNumericBase
-import com.example.permutabittools.adapters.HIstoricoAdapter
+import com.example.permutabittools.ui.adapters.HIstoricoAdapter
 import com.example.permutabittools.util.Conversoes
 import com.example.permutabittools.util.NumericBase
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.serialization.StringFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -31,7 +24,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
     private var baseOrigem: NumericBase? = null
     private var baseDestino: NumericBase? = null
     private lateinit var valor: String
-    private val historicoAdapter: HIstoricoAdapter = HIstoricoAdapter()
+    private lateinit var historicoAdapter: HIstoricoAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentBasenumericaBinding.inflate(inflater, container, false)
@@ -44,7 +37,16 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
 
         carregarExposedDropDowns() //Carrega o conteúdo dos spinners
 
-        binding.recyclerHistoricoBasesNumericas.layoutManager = LinearLayoutManager(context)
+        //Instanciando o adapter do Histórico com seu evento de clique
+        historicoAdapter = HIstoricoAdapter{conversoes ->
+            val bundle = Bundle()
+            bundle.putSerializable("conversaoSelecionada", conversoes)
+
+            findNavController().navigate(R.id
+                    .action_nav_basesNumericas_to_nav_calculoBasesNumericas, bundle)
+        }
+
+        binding.recyclerHistoricoBasesNumericas.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerHistoricoBasesNumericas.adapter = historicoAdapter
 
         //Tratamento da seleção de itens do Exposed DropDown de origem

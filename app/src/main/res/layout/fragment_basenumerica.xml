@@ -185,7 +185,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerHistoricoBasesNumericas"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="223dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
