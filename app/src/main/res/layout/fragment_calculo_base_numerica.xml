@@ -103,7 +103,9 @@
             android:id="@+id/txtPassoapasso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
     </androidx.core.widget.NestedScrollView>
 

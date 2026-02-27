@@ -1,4 +1,4 @@
-package com.example.permutabittools.util
+package com.example.permutabittools.viewModel
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.permutabittools.databinding.ItemHistoricoBaseNumericaBinding

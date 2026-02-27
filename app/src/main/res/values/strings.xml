@@ -19,9 +19,12 @@
         <item>Hexadecimal</item>
     </string-array>
 
+    <!--Alertas da Fragment de bases numéricas-->
     <string name="alerta_inserir_valor">❌ Insira um valor!</string>
     <string name="alerta_selecionar_bases">❌ Selecione as bases numéricas!</string>
     <string name="alerta_valor_invalido">❌ Valor inválido!</string>
+    <string name="alerta_bases_iguais">❌ Bases iguais selecionadas!</string>
+
     <string name="entendi">Ok, endendi!</string>
 
     <string name="nav_header_subtitle">Selecione sua conversão</string>

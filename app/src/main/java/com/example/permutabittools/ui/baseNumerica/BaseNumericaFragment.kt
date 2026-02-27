@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.permutabittools.R
 import com.example.permutabittools.databinding.FragmentBasenumericaBinding
 import com.example.permutabittools.ui.adapters.HIstoricoAdapter
-import com.example.permutabittools.util.Conversoes
-import com.example.permutabittools.util.NumericBase
+import com.example.permutabittools.viewModel.Conversoes
+import com.example.permutabittools.viewModel.NumericBase
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -86,18 +86,24 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
         //tratamento do click do botão converter
         when(v?.id){
             binding.buttonConverterBaseNumerica.id -> {
+
+                //Pega o valor digitado no TextInput
                 valor = binding.editTextInputBaseNumerica.text.toString()
-                if(valor.isEmpty()){
+
+                if(valor.isEmpty()){//Verifica se o usuário digitou o valor da entrada
                     alerta(getString(R.string.alerta_inserir_valor))
                     return
                 }
-                else if(baseOrigem == null || baseDestino == null){
+                else if(baseOrigem == null || baseDestino == null){//Verifica se o usuário selecionou as bases numéricas
                     alerta(getString(R.string.alerta_selecionar_bases))
                     return
                 }
-
-                else converter()
-                esconderTeclado()
+                else if(baseOrigem == baseDestino){//Verifica se as bases numéricas selecionadas são iguais
+                    alerta(getString(R.string.alerta_bases_iguais))
+                    return
+                }
+                else converter() //Se estiver tudo bem, realiza a conversão
+                esconderTeclado()//Esconde o teclado ao apertar o botão
             }
         }
     }

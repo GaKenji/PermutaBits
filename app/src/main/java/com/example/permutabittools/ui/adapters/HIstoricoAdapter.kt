@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.permutabittools.databinding.ItemHistoricoBaseNumericaBinding
-import com.example.permutabittools.util.Conversoes
-import com.example.permutabittools.util.HistoricoViewHolder
+import com.example.permutabittools.viewModel.Conversoes
+import com.example.permutabittools.viewModel.HistoricoViewHolder
 
 class HIstoricoAdapter(private val onItemClick: (Conversoes) -> Unit): RecyclerView.Adapter<HistoricoViewHolder>(){
 

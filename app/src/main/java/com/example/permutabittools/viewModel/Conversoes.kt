@@ -1,4 +1,4 @@
-package com.example.permutabittools.util
+package com.example.permutabittools.viewModel
 
 import java.io.Serializable
 data class Conversoes (
