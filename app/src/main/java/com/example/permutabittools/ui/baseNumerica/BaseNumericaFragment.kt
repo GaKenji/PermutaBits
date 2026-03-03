@@ -9,7 +9,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.example.permutabittools.R
+import com.example.permutabittools.dataBase.PermutaDataBase
 import com.example.permutabittools.databinding.FragmentBasenumericaBinding
 import com.example.permutabittools.ui.adapters.HIstoricoAdapter
 import com.example.permutabittools.viewModel.Conversoes
@@ -151,7 +153,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
             val hora = dataHora.format(DateTimeFormatter.ofPattern("HH:mm"))
 
             //Instancia a conversao com os valores utilizados nela
-            val conversao = Conversoes(baseOrigem!!.name, baseDestino!!.name, valor, resultado, data, hora)
+            val conversao = Conversoes(baseOrigem!!.name, baseDestino!!.name, valor, resultado, data, hora,false)
             historicoAdapter.adicionarConversoes(conversao)//adiciona a conversão a lista do adapter
             alterarVisibilidadeReCyclerView()
             binding.recyclerHistoricoBasesNumericas.smoothScrollToPosition(0)

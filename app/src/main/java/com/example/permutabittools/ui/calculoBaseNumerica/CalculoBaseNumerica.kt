@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.permutabittools.databinding.FragmentCalculoBaseNumericaBinding
 import com.example.permutabittools.viewModel.Conversoes
 import com.example.permutabittools.viewModel.NumericBase
@@ -78,7 +79,7 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id){
             R.id.buttonCopiar -> {
-
+                Toast.makeText(requireContext(), "Copiando cálculos", Toast.LENGTH_SHORT).show()
             }
         }
     }

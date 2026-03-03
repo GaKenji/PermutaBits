@@ -7,6 +7,7 @@ data class Conversoes (
     val valorEntrada: String,
     val valorSaida: String,
     val data: String,
-    val hora: String
+    val hora: String,
+    val favotito: Boolean
     //classe destinada a armazenar uma conversão de base numérica
 ): Serializable
