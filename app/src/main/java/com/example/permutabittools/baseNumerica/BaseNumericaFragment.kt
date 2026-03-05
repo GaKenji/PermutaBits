@@ -1,21 +1,25 @@
-package com.example.permutabittools.ui.baseNumerica
+package com.example.permutabittools.baseNumerica
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.permutabittools.R
 import com.example.permutabittools.dataBase.PermutaDataBase
 import com.example.permutabittools.databinding.FragmentBasenumericaBinding
-import com.example.permutabittools.ui.adapters.HIstoricoAdapter
-import com.example.permutabittools.viewModel.Conversoes
-import com.example.permutabittools.viewModel.NumericBase
+import com.example.permutabittools.baseNumerica.HIstoricoAdapter
+import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
+import com.example.permutabittools.dataBase.ConversoesDataBase
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -27,6 +31,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
     private var baseDestino: NumericBase? = null
     private lateinit var valor: String
     private lateinit var historicoAdapter: HIstoricoAdapter
+    private lateinit var db: PermutaDataBase
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentBasenumericaBinding.inflate(inflater, container, false)
@@ -36,6 +41,8 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        db = PermutaDataBase.getDataBase(requireContext())
 
         carregarExposedDropDowns() //Carrega o conteúdo dos spinners
 
@@ -63,8 +70,21 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
             baseDestino = mapearBases(selecionado)
         }
 
-        alterarVisibilidadeReCyclerView()
+        viewLifecycleOwner.lifecycleScope.launch {
+            db.conversaoDao().getAll().collect {lista->
+                historicoAdapter.atualizaLista(lista)
+                alterarVisibilidadeReCyclerView()
+
+                if(lista.isNotEmpty()){
+                    binding.recyclerHistoricoBasesNumericas.smoothScrollToPosition(0)
+                }
+
+            }
+        }
+
         binding.buttonConverterBaseNumerica.setOnClickListener(this)//captação do evento de click do botão converter
+        binding.buttonApagarHistorico.setOnClickListener(this)
+
     }
 
     override fun onResume() {
@@ -106,6 +126,11 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
                 }
                 else converter() //Se estiver tudo bem, realiza a conversão
                 esconderTeclado()//Esconde o teclado ao apertar o botão
+            }
+            R.id.buttonApagarHistorico -> {
+                lifecycleScope.launch {
+                    db.conversaoDao().deleteAll()
+                }
             }
         }
     }
@@ -153,10 +178,20 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
             val hora = dataHora.format(DateTimeFormatter.ofPattern("HH:mm"))
 
             //Instancia a conversao com os valores utilizados nela
-            val conversao = Conversoes(baseOrigem!!.name, baseDestino!!.name, valor, resultado, data, hora,false)
-            historicoAdapter.adicionarConversoes(conversao)//adiciona a conversão a lista do adapter
-            alterarVisibilidadeReCyclerView()
-            binding.recyclerHistoricoBasesNumericas.smoothScrollToPosition(0)
+            val conversao = ConversoesDataBase(
+                0,
+                baseOrigem!!.name,
+                baseDestino!!.name,
+                valor,
+                resultado,
+                data,
+                hora,
+                false
+            )
+
+            lifecycleScope.launch {
+                db.conversaoDao().inserirConversao(conversao)
+            }
 
         }catch (e: Exception){
             alerta(getString(R.string.alerta_valor_invalido))
@@ -197,7 +232,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
     }
 
     private fun esconderTeclado(){
-        val imm = requireContext().getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         requireActivity().currentFocus?.let {
             imm.hideSoftInputFromWindow(it.windowToken, 0)
             it.clearFocus()

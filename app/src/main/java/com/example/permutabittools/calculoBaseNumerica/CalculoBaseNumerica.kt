@@ -1,4 +1,4 @@
-package com.example.permutabittools.ui.calculoBaseNumerica
+package com.example.permutabittools.calculoBaseNumerica
 
 import com.example.permutabittools.R
 import android.os.Build
@@ -9,14 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.permutabittools.databinding.FragmentCalculoBaseNumericaBinding
-import com.example.permutabittools.viewModel.Conversoes
-import com.example.permutabittools.viewModel.NumericBase
+import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
+import com.example.permutabittools.dataBase.ConversoesDataBase
 
 class CalculoBaseNumerica : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentCalculoBaseNumericaBinding? = null
     private val binding get() = _binding!!
-    private var conversao: Conversoes? = null
+    private var conversao: ConversoesDataBase? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,10 +43,10 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
 
     private fun receberDadosConversao() {
         conversao = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getSerializable("conversaoSelecionada", Conversoes::class.java)
+            arguments?.getSerializable("conversaoSelecionada", ConversoesDataBase::class.java)
         } else {
             @Suppress("DEPRECATION")
-            arguments?.getSerializable("conversaoSelecionada") as? Conversoes
+            arguments?.getSerializable("conversaoSelecionada") as? ConversoesDataBase
         }
     }
 

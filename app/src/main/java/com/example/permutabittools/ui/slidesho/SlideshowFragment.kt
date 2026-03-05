@@ -1,4 +1,4 @@
-package com.example.permutabittools.ui.slideshow
+package com.example.permutabittools.ui.slidesho
 
 import android.os.Bundle
 import android.view.LayoutInflater

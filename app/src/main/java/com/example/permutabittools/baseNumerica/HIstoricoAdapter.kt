@@ -1,15 +1,15 @@
-package com.example.permutabittools.ui.adapters
+package com.example.permutabittools.baseNumerica
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.permutabittools.databinding.ItemHistoricoBaseNumericaBinding
-import com.example.permutabittools.viewModel.Conversoes
-import com.example.permutabittools.viewModel.HistoricoViewHolder
+import com.example.permutabittools.baseNumerica.HistoricoViewHolder
+import com.example.permutabittools.dataBase.ConversoesDataBase
 
-class HIstoricoAdapter(private val onItemClick: (Conversoes) -> Unit): RecyclerView.Adapter<HistoricoViewHolder>(){
+class HIstoricoAdapter(private val onItemClick: (ConversoesDataBase) -> Unit): RecyclerView.Adapter<HistoricoViewHolder>(){
 
-    private val listaConversoes = mutableListOf<Conversoes>()
+    private val listaConversoes = mutableListOf<ConversoesDataBase>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoricoViewHolder {
         //Cria a view referente ao meu layout de cada item
@@ -31,7 +31,12 @@ class HIstoricoAdapter(private val onItemClick: (Conversoes) -> Unit): RecyclerV
         return listaConversoes.size
     }
 
-    fun adicionarConversoes(conversao: Conversoes){
+    fun atualizaLista(novaLista: List<ConversoesDataBase>){
+        listaConversoes.clear()
+        listaConversoes.addAll(novaLista)
+        notifyItemInserted(0)
+    }
+    fun adicionarConversoes(conversao: ConversoesDataBase){
         //Adiciona cada conversão realizada a minha lista de conversões do adapter
         listaConversoes.add(0, conversao)
         notifyItemInserted(0)

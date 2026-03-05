@@ -1,4 +1,4 @@
-package com.example.permutabittools.ui.gallery
+package com.example.permutabittools.gallery
 
 import com.example.permutabittools.R
 import android.os.Bundle

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_basesNumericas"
-        android:name="com.example.permutabittools.ui.baseNumerica.BaseNumericaFragment"
+        android:name="com.example.permutabittools.baseNumerica.BaseNumericaFragment"
         android:label="@string/menu_BaseNumerica"
         tools:layout="@layout/fragment_basenumerica">
 
@@ -19,19 +19,19 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.permutabittools.ui.gallery.GalleryFragment"
+        android:name="com.example.permutabittools.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.permutabittools.ui.slideshow.SlideshowFragment"
+        android:name="com.example.permutabittools.ui.slidesho.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_calculoBasesNumericas"
-        android:name="com.example.permutabittools.ui.calculoBaseNumerica.CalculoBaseNumerica"
+        android:name="com.example.permutabittools.calculoBaseNumerica.CalculoBaseNumerica"
         android:label="@string/menu_CalculoBaseNumerica"
         tools:layout="@layout/fragment_calculo_base_numerica"/>
 </navigation>

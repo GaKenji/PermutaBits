@@ -1,4 +1,4 @@
-package com.example.permutabittools.ui.slideshow
+package com.example.permutabittools.ui.slidesho
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
