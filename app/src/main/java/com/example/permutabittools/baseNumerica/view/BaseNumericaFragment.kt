@@ -9,12 +9,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.permutabittools.R
 import com.example.permutabittools.baseNumerica.HIstoricoAdapter
 import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
+import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModel
 import com.example.permutabittools.dataBase.ConversoesDataBase
 import com.example.permutabittools.dataBase.PermutaDataBase
 import com.example.permutabittools.databinding.FragmentBasenumericaBinding
@@ -28,9 +30,10 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
     private val binding get() = _binding!!
     private var baseOrigem: NumericBase? = null
     private var baseDestino: NumericBase? = null
-    private lateinit var valor: String
+    private lateinit var valorEntrada: String
     private lateinit var historicoAdapter: HIstoricoAdapter
     private lateinit var db: PermutaDataBase
+    private lateinit var viewModel: BaseNumericaViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentBasenumericaBinding.inflate(inflater, container, false)
@@ -40,6 +43,8 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(BaseNumericaViewModel::class.java)
 
         db = PermutaDataBase.Companion.getDataBase(requireContext())
 
@@ -112,9 +117,9 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
             binding.buttonConverterBaseNumerica.id -> {
 
                 //Pega o valor digitado no TextInput
-                valor = binding.editTextInputBaseNumerica.text.toString()
+                valorEntrada = binding.editTextInputBaseNumerica.text.toString()
 
-                if(valor.isEmpty()){//Verifica se o usuário digitou o valor da entrada
+                if(valorEntrada.isEmpty()){//Verifica se o usuário digitou o valor da entrada
                     alerta(getString(R.string.alerta_inserir_valor))
                     return
                 }
@@ -177,8 +182,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
         //Método responsável por fazer as conversões
         //Chamado quando o usuário apertar o botão converter
         try{
-            val decimal = paraDecimal()//Converte o valor primeiro para decimal
-            val resultado = deDecimal(decimal)//Depois converte o valor para a base desejada
+            val resultado = viewModel.converter(valorEntrada, baseOrigem, baseDestino)
             binding.textViewMostraResultado.setText(resultado)
 
             //Pega a data e a hora que a conversão foi feita
@@ -191,7 +195,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
                 0,
                 baseOrigem!!.name,
                 baseDestino!!.name,
-                valor,
+                valorEntrada,
                 resultado,
                 data,
                 hora,
@@ -217,29 +221,6 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
         //Pega uma string do arquivo strings.xml referente ao erro e exibe ao usuário
     }
 
-    private fun paraDecimal(): Int{
-        //Primeiro passo da conversão
-        //Pega o valor da textView e depois converte para decimal
-        return when(baseOrigem!!){
-            //Pegua a string valor que está na base radix e devolve um decimal equivalente
-            NumericBase.BINARIO -> valor.toInt(2)
-            NumericBase.OCTAL -> valor.toInt(8)
-            NumericBase.DECIMAL -> valor.toInt(10)
-            NumericBase.HEXADECIMAL -> valor.toInt(16)
-        }
-    }
-
-    private fun deDecimal(dcimal: Int): String{
-        //Segundo passo da conversão
-        //Pega o valor em Decimal e converte para a base de destino escolhida
-        return when(baseDestino!!){
-            NumericBase.BINARIO -> dcimal.toString(2)
-            NumericBase.OCTAL -> dcimal.toString(8)
-            NumericBase.DECIMAL -> dcimal.toString(10)
-            NumericBase.HEXADECIMAL -> dcimal.toString(16).uppercase()
-        }
-    }
-
     private fun esconderTeclado(){
         val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         requireActivity().currentFocus?.let {
@@ -247,7 +228,6 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
             it.clearFocus()
         }
     }
-
     private fun alterarVisibilidadeReCyclerView(){
         if (historicoAdapter.itemCount == 0){
             binding.txtListaVazia.visibility = View.VISIBLE
