@@ -24,8 +24,12 @@
     <string name="alerta_selecionar_bases">❌ Selecione as bases numéricas!</string>
     <string name="alerta_valor_invalido">❌ Valor inválido!</string>
     <string name="alerta_bases_iguais">❌ Bases iguais selecionadas!</string>
+    <string name="alerta_deletar_dados">Deseja apagar o histórico de conversões?</string>
+    <string name="alerta_titulo_deletar_dados">⚠️Seu histórico será apagado!</string>
 
     <string name="entendi">Ok, endendi!</string>
+    <string name="oK">Ok</string>
+    <string name="cancelar">Cancelar</string>
 
     <string name="nav_header_subtitle">Selecione sua conversão</string>
     <string name="Converter">Converter</string>

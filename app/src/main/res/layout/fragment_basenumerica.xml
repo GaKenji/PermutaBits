@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_fragment_bases_numericas"
-    tools:context=".baseNumerica.BaseNumericaFragment">
+    tools:context=".baseNumerica.view.BaseNumericaFragment">
 
 
     <com.google.android.material.textfield.TextInputLayout

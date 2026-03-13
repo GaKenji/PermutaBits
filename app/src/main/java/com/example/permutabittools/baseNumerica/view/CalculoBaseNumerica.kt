@@ -1,16 +1,16 @@
-package com.example.permutabittools.calculoBaseNumerica
+package com.example.permutabittools.baseNumerica.view
 
-import com.example.permutabittools.R
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.permutabittools.databinding.FragmentCalculoBaseNumericaBinding
+import androidx.fragment.app.Fragment
+import com.example.permutabittools.R
 import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
 import com.example.permutabittools.dataBase.ConversoesDataBase
+import com.example.permutabittools.databinding.FragmentCalculoBaseNumericaBinding
 
 class CalculoBaseNumerica : Fragment(), View.OnClickListener {
 

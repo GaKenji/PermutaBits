@@ -1,4 +1,4 @@
-package com.example.permutabittools.baseNumerica
+package com.example.permutabittools.baseNumerica.view
 
 import android.content.Context
 import android.os.Bundle
@@ -12,13 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.example.permutabittools.R
-import com.example.permutabittools.dataBase.PermutaDataBase
-import com.example.permutabittools.databinding.FragmentBasenumericaBinding
 import com.example.permutabittools.baseNumerica.HIstoricoAdapter
 import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
 import com.example.permutabittools.dataBase.ConversoesDataBase
+import com.example.permutabittools.dataBase.PermutaDataBase
+import com.example.permutabittools.databinding.FragmentBasenumericaBinding
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -42,20 +41,23 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        db = PermutaDataBase.getDataBase(requireContext())
+        db = PermutaDataBase.Companion.getDataBase(requireContext())
 
         carregarExposedDropDowns() //Carrega o conteúdo dos spinners
 
         //Instanciando o adapter do Histórico com seu evento de clique
-        historicoAdapter = HIstoricoAdapter{conversoes ->
+        historicoAdapter = HIstoricoAdapter { conversoes ->
             val bundle = Bundle()
             bundle.putSerializable("conversaoSelecionada", conversoes)
 
-            findNavController().navigate(R.id
-                    .action_nav_basesNumericas_to_nav_calculoBasesNumericas, bundle)
+            findNavController().navigate(
+                R.id
+                    .action_nav_basesNumericas_to_nav_calculoBasesNumericas, bundle
+            )
         }
 
-        binding.recyclerHistoricoBasesNumericas.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerHistoricoBasesNumericas.layoutManager =
+            LinearLayoutManager(requireContext())
         binding.recyclerHistoricoBasesNumericas.adapter = historicoAdapter
 
         //Tratamento da seleção de itens do Exposed DropDown de origem
@@ -128,9 +130,16 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
                 esconderTeclado()//Esconde o teclado ao apertar o botão
             }
             R.id.buttonApagarHistorico -> {
-                lifecycleScope.launch {
-                    db.conversaoDao().deleteAll()
-                }
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.alerta_titulo_deletar_dados))
+                    .setMessage(getString(R.string.alerta_deletar_dados))
+                    .setPositiveButton(R.string.oK) { dialog, whitch->
+                        lifecycleScope.launch {
+                            db.conversaoDao().deleteAll()
+                        }
+                    }
+                    .setNegativeButton(R.string.cancelar, null)
+                    .show()
             }
         }
     }
@@ -143,8 +152,8 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
 
         //Uso de um adapter para criar um spinner personalizado
         //Requer o contexto e a lista de valores que preencherão os spinners
-        val adapter1 = ArrayAdapter(requireContext(), R.layout.spinner_item,lista1)
-        val adapter2 = ArrayAdapter(requireContext(), R.layout.spinner_item,lista2)
+        val adapter1 = ArrayAdapter(requireContext(), R.layout.spinner_item, lista1)
+        val adapter2 = ArrayAdapter(requireContext(), R.layout.spinner_item, lista2)
 
         //preenche os spinners depois de obtermos o adapter
         binding.exposedDropDownInput.setAdapter(adapter1)
