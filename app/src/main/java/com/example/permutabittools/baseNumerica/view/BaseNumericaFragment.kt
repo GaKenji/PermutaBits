@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.permutabittools.R
-import com.example.permutabittools.baseNumerica.HIstoricoAdapter
+import com.example.permutabittools.baseNumerica.view.HIstoricoAdapter
 import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
 import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModel
 import com.example.permutabittools.dataBase.ConversoesDataBase
@@ -68,13 +68,13 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
         //Tratamento da seleção de itens do Exposed DropDown de origem
         binding.exposedDropDownInput.setOnItemClickListener { parent, _, position, _ ->
             val selecionado = parent.getItemAtPosition(position).toString()
-            baseOrigem = mapearBases(selecionado)
+            baseOrigem = viewModel.mapearBases(selecionado)
         }
 
         //Tratamento da seleção de itens do Exposed DropDown de Destino
         binding.exposedDropDownOutput.setOnItemClickListener { parent, _, position, _ ->
             val selecionado = parent.getItemAtPosition(position).toString()
-            baseDestino = mapearBases(selecionado)
+            baseDestino = viewModel.mapearBases(selecionado)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -148,7 +148,6 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
             }
         }
     }
-
     private fun carregarExposedDropDowns(){
         //Prenche listas de valores que serão colocados nos spinners
         //Os valores colocados estão descritos em strings.xml
@@ -164,20 +163,6 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
         binding.exposedDropDownInput.setAdapter(adapter1)
         binding.exposedDropDownOutput.setAdapter(adapter2)
     }
-
-    private fun mapearBases(select: String): NumericBase?{
-        //Mapeamento das bases numéricas para os spinners
-        //Trata os itens que podem ser clicados
-        //Descarta a acão do click do primeiro item "De..." e "Para..."
-        return when(select){
-            "Binário" -> NumericBase.BINARIO
-            "Octal" -> NumericBase.OCTAL
-            "Decimal" -> NumericBase.DECIMAL
-            "Hexadecimal" -> NumericBase.HEXADECIMAL
-            else -> null
-        }
-    }
-
     private fun converter(){
         //Método responsável por fazer as conversões
         //Chamado quando o usuário apertar o botão converter
@@ -211,16 +196,14 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
             //alerta chamado para quando o usuário digitar uma entrada inválida
         }
     }
-
     private fun alerta(alerta: String){
         AlertDialog.Builder(requireContext()).
         setMessage(alerta).
-        setNeutralButton(getString(R.string.entendi), null).
+        setNeutralButton(R.string.entendi, null).
         show()
         //Método usado para alertar o usuário sobre algum erro
         //Pega uma string do arquivo strings.xml referente ao erro e exibe ao usuário
     }
-
     private fun esconderTeclado(){
         val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         requireActivity().currentFocus?.let {

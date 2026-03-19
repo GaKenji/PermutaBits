@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.permutabittools.R
 import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
+import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModel
 import com.example.permutabittools.dataBase.ConversoesDataBase
 import com.example.permutabittools.databinding.FragmentCalculoBaseNumericaBinding
 
@@ -17,6 +19,7 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
     private var _binding: FragmentCalculoBaseNumericaBinding? = null
     private val binding get() = _binding!!
     private var conversao: ConversoesDataBase? = null
+    private lateinit var viewModel: BaseNumericaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,9 +33,11 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(BaseNumericaViewModel::class.java)
+
         receberDadosConversao() //Recebo os dados da fragment
         mostrarDadosConversao() //Exibo os dados na parte superior da fragment
-        calcularEmostrarConversao() //Faz os cálculos e mostro o passo a passo da conversão
+        viewModel.calcularEmostrarConversao(conversao!!.baseOrigem, conversao!!.baseDestino, conversao!!.valorEntrada) //Faz os cálculos e mostro o passo a passo da conversão
         binding.buttonCopiar.setOnClickListener(this)
     }
 
@@ -55,25 +60,6 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
         binding.textInformaBaseSaida.setText("${conversao?.baseDestino}")
         binding.txtInformaValorEndrada.setText("${conversao?.valorEntrada}")
         binding.textInformaValorSaida.setText("${conversao?.valorSaida}")
-    }
-
-    private fun calcularEmostrarConversao() {
-        if(conversao!!.baseOrigem.equals(NumericBase.DECIMAL)){
-            if(conversao!!.baseDestino.equals(NumericBase.HEXADECIMAL)){
-                binding.txtPassoapasso.setText("De decimal -> Mapeamento ->  para hexadecimal")
-            }
-            else{
-                binding.txtPassoapasso.setText("De decimal para ${conversao?.baseDestino}")
-            }
-        }
-        else{
-            if(conversao!!.baseOrigem.equals(NumericBase.HEXADECIMAL)){
-                binding.txtPassoapasso.setText("De Hexadecimal -> Mapeamento -> ${conversao?.baseDestino}")
-            }
-            else{
-                binding.txtPassoapasso.setText("De ${conversao?.baseOrigem} -> ${conversao?.baseDestino}")
-            }
-        }
     }
 
     override fun onClick(v: View?) {

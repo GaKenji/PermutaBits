@@ -1,11 +1,11 @@
-package com.example.permutabittools.baseNumerica
+package com.example.permutabittools.baseNumerica.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.permutabittools.databinding.ItemHistoricoBaseNumericaBinding
-import com.example.permutabittools.baseNumerica.HistoricoViewHolder
+import com.example.permutabittools.baseNumerica.view.HistoricoViewHolder
 import com.example.permutabittools.dataBase.ConversoesDataBase
+import com.example.permutabittools.databinding.ItemHistoricoBaseNumericaBinding
 
 class HIstoricoAdapter(private val onItemClick: (ConversoesDataBase) -> Unit): RecyclerView.Adapter<HistoricoViewHolder>(){
 
