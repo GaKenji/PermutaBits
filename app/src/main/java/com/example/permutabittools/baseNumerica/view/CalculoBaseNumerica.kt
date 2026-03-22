@@ -37,7 +37,7 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
 
         receberDadosConversao() //Recebo os dados da fragment
         mostrarDadosConversao() //Exibo os dados na parte superior da fragment
-        viewModel.calcularEmostrarConversao(conversao!!.baseOrigem, conversao!!.baseDestino, conversao!!.valorEntrada) //Faz os cálculos e mostro o passo a passo da conversão
+        exibirPassoaPasso()
         binding.buttonCopiar.setOnClickListener(this)
     }
 
@@ -60,6 +60,13 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
         binding.textInformaBaseSaida.setText("${conversao?.baseDestino}")
         binding.txtInformaValorEndrada.setText("${conversao?.valorEntrada}")
         binding.textInformaValorSaida.setText("${conversao?.valorSaida}")
+    }
+
+    private fun exibirPassoaPasso(){
+        //Faz os cálculos e mostro o passo a passo da conversão
+        viewModel.calcularEmostrarConversao(conversao!!.baseOrigem,
+            conversao!!.baseDestino,
+            conversao!!.valorEntrada)
     }
 
     override fun onClick(v: View?) {
