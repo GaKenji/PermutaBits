@@ -49,7 +49,9 @@ class BaseNumericaViewModel(): ViewModel() {
 
     }
 
-    fun calcularEmostrarConversao(baseOrigem: String, baseDestino: String, valor: String) {
+    fun calcularEmostrarConversao(baseOrigem: String, baseDestino: String, valor: String): List<String> {
+        val passos = mutableListOf<String>()
+
         var tamanho: Int = valor.length - 1
 
         val algarismos = ArrayList<Int>()
@@ -66,11 +68,13 @@ class BaseNumericaViewModel(): ViewModel() {
         when(destino?.name){
             "DECIMAL" -> {
                 if(origem?.name.equals("HEXADECIMAL")){
-                    println("Converter valores Hexadecimais para decimais")
+                    passos.add("Converter valores Hexadecimais para decimais\n")
+                    //println("Converter valores Hexadecimais para decimais")
                     for(i in valor){
-                        print("${i} ===> ")
+                        //print("${i} ===> ${i.digitToInt(16)}\n")
+                        passos.add("${i} ===> ${i.digitToInt(16)}")
                         algarismos.add(i.digitToInt(16))
-                        print("${i.digitToInt(16)}\n")
+                        //print("${i.digitToInt(16)}\n")
                     }
                 }
                 else{
@@ -81,19 +85,25 @@ class BaseNumericaViewModel(): ViewModel() {
                     println(algarismos)
                 }
 
-                println("Organizar os algarismos da seguinte forma:")
+                //println("Organizar os algarismos da seguinte forma:")
+                passos.add("\nOrganizar os algarismos da seguinte forma:\n")
                 for(i in algarismos){
                     //println("Algarismo: ${i}  ======>  Expoente: ${tamanho}")
                     resultado += i * potencia(base, tamanho)
                     if(tamanho != 0)
-                        print("(${i} X ${base}^${tamanho}) + ")
-                    else print("(${i} X ${base}^${tamanho}) = ")
+                        passos.add("(${i} X ${base}^${tamanho}) + ")
+                        //print("(${i} X ${base}^${tamanho}) + ")
+                    else
+                        passos.add("(${i} X ${base}^${tamanho}) = ")
+                        //print("(${i} X ${base}^${tamanho}) = ")
                     tamanho--
                 }
-                print("${resultado}\n")
+                passos.add("${resultado}\n")
+                //print("${resultado}\n")
             }
-            else -> println("A base de destino NÃO É DECIMAL!!")
+            else -> passos.add("Em implementação!!")//println("A base de destino NÃO É DECIMAL!!")
         }
+        return passos
     }
 
     private fun potencia(num: Int, pot: Int): Int{

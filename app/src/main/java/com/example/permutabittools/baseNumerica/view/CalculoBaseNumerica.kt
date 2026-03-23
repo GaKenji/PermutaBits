@@ -64,9 +64,10 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
 
     private fun exibirPassoaPasso(){
         //Faz os cálculos e mostro o passo a passo da conversão
-        viewModel.calcularEmostrarConversao(conversao!!.baseOrigem,
+        val passos = viewModel.calcularEmostrarConversao(conversao!!.baseOrigem,
             conversao!!.baseDestino,
             conversao!!.valorEntrada)
+        binding.txtPassoapasso.text = passos.joinToString("\n")
     }
 
     override fun onClick(v: View?) {
