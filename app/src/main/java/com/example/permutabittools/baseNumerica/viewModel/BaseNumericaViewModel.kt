@@ -9,11 +9,13 @@ import com.example.permutabittools.dataBase.PermutaDataBase
 import kotlinx.coroutines.launch
 import java.lang.Math.pow
 import kotlin.math.pow
+import kotlin.text.iterator
 
 class BaseNumericaViewModel(): ViewModel() {
 
     private var origem: NumericBase? = null
     private var destino: NumericBase? = null
+    private val algarismos = ArrayList<Int>()
 
     fun mapearBases(select: String): NumericBase?{
         //Mapeamento das bases numéricas para os spinners
@@ -53,55 +55,83 @@ class BaseNumericaViewModel(): ViewModel() {
         val passos = mutableListOf<String>()
 
         var tamanho: Int = valor.length - 1
-
-        val algarismos = ArrayList<Int>()
-        var resultado: Int = 0
+        val resultado = ArrayList<Int>()
+        var resultadoDecimal: Int = 0
 
         origem = mapearBases(baseOrigem)
         destino = mapearBases(baseDestino)
 
         val base = origem!!.raiz
 
-        println("BASE ENTRADA: ${origem?.name} ${origem?.raiz}")
-        println("BASE SAÌDA: ${destino?.name} ${destino?.raiz}")
-
         when(destino?.name){
             "DECIMAL" -> {
                 if(origem?.name.equals("HEXADECIMAL")){
                     passos.add("Converter valores Hexadecimais para decimais\n")
-                    //println("Converter valores Hexadecimais para decimais")
                     for(i in valor){
-                        //print("${i} ===> ${i.digitToInt(16)}\n")
-                        passos.add("${i} ===> ${i.digitToInt(16)}")
-                        algarismos.add(i.digitToInt(16))
-                        //print("${i.digitToInt(16)}\n")
+                        var digito = i.digitToInt(16)
+                        passos.add("${i} ===> ${digito}")
+                        algarismos.add(digito)
                     }
                 }
-                else{
-                    for(i in valor){
-                        algarismos.add(i.digitToInt())
-                    }
-                    println("Outros valores")
-                    println(algarismos)
-                }
+                else for(i in valor) algarismos.add(i.digitToInt())
 
-                //println("Organizar os algarismos da seguinte forma:")
                 passos.add("\nOrganizar os algarismos da seguinte forma:\n")
                 for(i in algarismos){
-                    //println("Algarismo: ${i}  ======>  Expoente: ${tamanho}")
-                    resultado += i * potencia(base, tamanho)
-                    if(tamanho != 0)
-                        passos.add("(${i} X ${base}^${tamanho}) + ")
-                        //print("(${i} X ${base}^${tamanho}) + ")
-                    else
-                        passos.add("(${i} X ${base}^${tamanho}) = ")
-                        //print("(${i} X ${base}^${tamanho}) = ")
+                    resultadoDecimal += i * potencia(base, tamanho)
+
+                    if(tamanho != 0) passos.add("(${i} X ${base}^${tamanho}) + ")
+                    else passos.add("(${i} X ${base}^${tamanho}) = ")
+
                     tamanho--
                 }
-                passos.add("${resultado}\n")
-                //print("${resultado}\n")
+                passos.add("${resultadoDecimal}\n")
             }
-            else -> passos.add("Em implementação!!")//println("A base de destino NÃO É DECIMAL!!")
+            else -> {
+
+                if(origem?.name.equals("HEXADECIMAL")){
+                    passos.add("Converter valores Hexadecimais para decimais\n")
+                    for(i in valor){
+                        var digito = i.digitToInt(16)
+                        passos.add("${i} ===> ${digito}")
+                        algarismos.add(digito)
+                    }
+                }
+                else for(i in valor) algarismos.add(i.digitToInt())
+
+                passos.add("\nOrganizar os algarismos da seguinte forma:\n")
+                for(i in algarismos){
+                    resultadoDecimal += i * potencia(base, tamanho)
+
+                    if(tamanho != 0) passos.add("(${i} X ${base}^${tamanho}) + ")
+                    else passos.add("(${i} X ${base}^${tamanho}) = ")
+
+                    tamanho--
+                }
+
+                passos.add("${resultadoDecimal}\n")
+                passos.add("\nConverta de decimal para a base ${destino?.name}\n")
+
+                var numero = resultadoDecimal
+                val restos = mutableListOf<String>()
+
+                while(numero > 0){
+                    val quociente = numero/destino!!.raiz
+                    val resto = numero % destino!!.raiz
+                    val restoString: String
+
+                    if(resto > 9 || resto < 16) restoString = resto.toString(16).uppercase()
+                    else restoString = resto.toString().uppercase()
+
+                    restos.add(restoString)
+                    passos.add("${numero} / ${destino!!.raiz} = ${quociente} ===> Resto = ${resto}")
+                    numero = quociente
+                }
+
+                val resultado = restos.reversed().joinToString("")
+
+                passos.add("\nLeia os restos de cima para baixo\n")
+                passos.add("Resultado final: ${resultado}")
+            }
         }
         return passos
     }
