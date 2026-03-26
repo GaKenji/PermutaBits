@@ -55,7 +55,6 @@ class BaseNumericaViewModel(): ViewModel() {
         val passos = mutableListOf<String>()
 
         var tamanho: Int = valor.length - 1
-        val resultado = ArrayList<Int>()
         var resultadoDecimal: Int = 0
 
         origem = mapearBases(baseOrigem)
@@ -66,7 +65,7 @@ class BaseNumericaViewModel(): ViewModel() {
         when(destino?.name){
             "DECIMAL" -> {
                 if(origem?.name.equals("HEXADECIMAL")){
-                    passos.add("Converter valores Hexadecimais para decimais\n")
+                    passos.add("Converter valores HEXADECIMAIS para DECIMAIS\n")
                     for(i in valor){
                         var digito = i.digitToInt(16)
                         passos.add("${i} ===> ${digito}")
@@ -80,36 +79,51 @@ class BaseNumericaViewModel(): ViewModel() {
                     resultadoDecimal += i * potencia(base, tamanho)
 
                     if(tamanho != 0) passos.add("(${i} X ${base}^${tamanho}) + ")
-                    else passos.add("(${i} X ${base}^${tamanho}) = ")
+                    else passos.add("(${i} X ${base}^${tamanho})")
 
                     tamanho--
                 }
-                passos.add("${resultadoDecimal}\n")
+                passos.add("\nResultado Final: ${resultadoDecimal}\n")
             }
             else -> {
 
                 if(origem?.name.equals("HEXADECIMAL")){
-                    passos.add("Converter valores Hexadecimais para decimais\n")
+                    passos.add("Converter valores HEXADECIMAIS para DECIMAIS\n")
                     for(i in valor){
                         var digito = i.digitToInt(16)
                         passos.add("${i} ===> ${digito}")
                         algarismos.add(digito)
                     }
+                    passos.add("\nOrganizar os algarismos da seguinte forma:\n")
+                    for(i in algarismos){
+                        resultadoDecimal += i * potencia(base, tamanho)
+
+                        if(tamanho != 0) passos.add("(${i} X ${base}^${tamanho}) + ")
+                        else passos.add("(${i} X ${base}^${tamanho}) = ")
+
+                        tamanho--
+                    }
+                    passos.add("Decimal = ${resultadoDecimal}\n")
                 }
-                else for(i in valor) algarismos.add(i.digitToInt())
+                else if(origem?.name.equals("DECIMAL")){
+                    resultadoDecimal = valor.toInt()
+                    passos.add("Decimal = ${resultadoDecimal}\n")
+                }
+                else{
+                    for(i in valor) algarismos.add(i.digitToInt())
+                    passos.add("\nOrganizar os algarismos da seguinte forma:\n")
+                    for(i in algarismos){
+                        resultadoDecimal += i * potencia(base, tamanho)
 
-                passos.add("\nOrganizar os algarismos da seguinte forma:\n")
-                for(i in algarismos){
-                    resultadoDecimal += i * potencia(base, tamanho)
+                        if(tamanho != 0) passos.add("(${i} X ${base}^${tamanho}) + ")
+                        else passos.add("(${i} X ${base}^${tamanho})")
 
-                    if(tamanho != 0) passos.add("(${i} X ${base}^${tamanho}) + ")
-                    else passos.add("(${i} X ${base}^${tamanho}) = ")
-
-                    tamanho--
+                        tamanho--
+                    }
+                    passos.add("\nDecimal = ${resultadoDecimal}\n")
                 }
 
-                passos.add("${resultadoDecimal}\n")
-                passos.add("\nConverta de decimal para a base ${destino?.name}\n")
+                passos.add("Converta de DECIMAL para a base ${destino?.name}\n")
 
                 var numero = resultadoDecimal
                 val restos = mutableListOf<String>()

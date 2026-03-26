@@ -1,5 +1,8 @@
 package com.example.permutabittools.baseNumerica.view
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -73,7 +76,13 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id){
             R.id.buttonCopiar -> {
-                Toast.makeText(requireContext(), "Copiando cálculos", Toast.LENGTH_SHORT).show()
+                val clipBoard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val texto = binding.txtPassoapasso.text.toString()
+
+                val clip = ClipData.newPlainText("Passo a passo", texto)
+                clipBoard.setPrimaryClip(clip)
+
+                Toast.makeText(requireContext(), R.string.toast_copiar_calculos, Toast.LENGTH_SHORT).show()
             }
         }
     }

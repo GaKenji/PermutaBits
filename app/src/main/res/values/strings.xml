@@ -40,6 +40,8 @@
 
     <!--Fragment passo a passo de bases numericas-->
     <string name="copiar">Copiar</string>
+    <string name="txtMostrarResolucao">Resolução passo a passo</string>
+    <string name="toast_copiar_calculos">Copiando Cálculos</string>
 
     <string name="input_value">Valor de entrada</string>
     <!-- TODO: Remove or change this placeholder text -->
