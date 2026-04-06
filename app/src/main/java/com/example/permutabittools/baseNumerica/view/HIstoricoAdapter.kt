@@ -19,27 +19,19 @@ class HIstoricoAdapter(private val onItemClick: (ConversoesDataBase) -> Unit): R
                 false)
         return HistoricoViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: HistoricoViewHolder, position: Int) {
         //Atribui valores para os elementos de layout
         holder.bind(listaConversoes[position])
         holder.itemView.setOnClickListener { onItemClick(listaConversoes[position]) }
     }
-
     override fun getItemCount(): Int {
         //retorna o tamanho da lista
         return listaConversoes.size
     }
-
     fun atualizaLista(novaLista: List<ConversoesDataBase>){
         listaConversoes.clear()
         listaConversoes.addAll(novaLista)
-        notifyItemInserted(0)
-    }
-    fun adicionarConversoes(conversao: ConversoesDataBase){
-        //Adiciona cada conversão realizada a minha lista de conversões do adapter
-        listaConversoes.add(0, conversao)
-        notifyItemInserted(0)
+        notifyDataSetChanged()
     }
 
 }

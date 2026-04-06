@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.permutabittools.R
+import com.example.permutabittools.baseNumerica.baseNumericaModel.ConversoesRepository
 import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
 import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModel
+import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModelFactory
 import com.example.permutabittools.dataBase.ConversoesDataBase
+import com.example.permutabittools.dataBase.PermutaDataBase
 import com.example.permutabittools.databinding.FragmentCalculoBaseNumericaBinding
 
 class CalculoBaseNumerica : Fragment(), View.OnClickListener {
@@ -36,7 +40,12 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BaseNumericaViewModel::class.java)
+
+        val dao = PermutaDataBase.getDataBase(requireContext()).conversaoDao()
+        val repository = ConversoesRepository(dao)
+        val factory = BaseNumericaViewModelFactory(repository)
+
+        viewModel = ViewModelProvider(this,factory).get(BaseNumericaViewModel::class.java)
 
         receberDadosConversao() //Recebo os dados da fragment
         mostrarDadosConversao() //Exibo os dados na parte superior da fragment
@@ -70,7 +79,7 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
         val passos = viewModel.calcularEmostrarConversao(conversao!!.baseOrigem,
             conversao!!.baseDestino,
             conversao!!.valorEntrada)
-        binding.txtPassoapasso.text = passos.joinToString("\n")
+        binding.txtPassoapasso.text = Html.fromHtml(passos.joinToString("<br>"), Html.FROM_HTML_MODE_LEGACY)
     }
 
     override fun onClick(v: View?) {

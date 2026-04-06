@@ -14,9 +14,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.permutabittools.R
+import com.example.permutabittools.baseNumerica.baseNumericaModel.ConversoesRepository
 import com.example.permutabittools.baseNumerica.view.HIstoricoAdapter
 import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
 import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModel
+import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModelFactory
 import com.example.permutabittools.dataBase.ConversoesDataBase
 import com.example.permutabittools.dataBase.PermutaDataBase
 import com.example.permutabittools.databinding.FragmentBasenumericaBinding
@@ -32,7 +34,6 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
     private var baseDestino: NumericBase? = null
     private lateinit var valorEntrada: String
     private lateinit var historicoAdapter: HIstoricoAdapter
-    private lateinit var db: PermutaDataBase
     private lateinit var viewModel: BaseNumericaViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -44,9 +45,11 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(BaseNumericaViewModel::class.java)
+        val dao = PermutaDataBase.getDataBase(requireContext()).conversaoDao()
+        val repository = ConversoesRepository(dao)
+        val factory = BaseNumericaViewModelFactory(repository)
 
-        db = PermutaDataBase.Companion.getDataBase(requireContext())
+        viewModel = ViewModelProvider(this, factory).get(BaseNumericaViewModel::class.java)
 
         carregarExposedDropDowns() //Carrega o conteúdo dos spinners
 
@@ -78,7 +81,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            db.conversaoDao().getAll().collect {lista->
+            viewModel.historico.collect {lista->
                 historicoAdapter.atualizaLista(lista)
                 alterarVisibilidadeReCyclerView()
 
@@ -140,7 +143,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
                     .setMessage(getString(R.string.alerta_deletar_dados))
                     .setPositiveButton(R.string.oK) { dialog, whitch->
                         lifecycleScope.launch {
-                            db.conversaoDao().deleteAll()
+                            viewModel.deleteTudo()
                         }
                     }
                     .setNegativeButton(R.string.cancelar, null)
@@ -188,7 +191,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
             )
 
             lifecycleScope.launch {
-                db.conversaoDao().inserirConversao(conversao)
+                viewModel.inserir(conversao)
             }
 
         }catch (e: Exception){
