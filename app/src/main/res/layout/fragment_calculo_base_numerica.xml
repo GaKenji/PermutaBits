@@ -94,7 +94,7 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrowViewPassoAPasso"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="350dp"
         app:layout_constraintTop_toTopOf="@id/View"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

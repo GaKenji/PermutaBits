@@ -20,6 +20,7 @@ import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModelF
 import com.example.permutabittools.dataBase.ConversoesDataBase
 import com.example.permutabittools.dataBase.PermutaDataBase
 import com.example.permutabittools.databinding.FragmentCalculoBaseNumericaBinding
+import com.example.permutabittools.baseNumerica.baseNumericaModel.TipoPasso
 
 class CalculoBaseNumerica : Fragment(), View.OnClickListener {
 
@@ -76,10 +77,26 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
 
     private fun exibirPassoaPasso(){
         //Faz os cálculos e mostro o passo a passo da conversão
-        val passos = viewModel.calcularEmostrarConversao(conversao!!.baseOrigem,
+        val passos = viewModel.calcularEmostrarConversao(
+            conversao!!.baseOrigem,
             conversao!!.baseDestino,
-            conversao!!.valorEntrada)
-        binding.txtPassoapasso.text = Html.fromHtml(passos.joinToString("<br>"), Html.FROM_HTML_MODE_LEGACY)
+            conversao!!.valorEntrada
+        )
+
+        val textoFinal = passos.joinToString("<br><br>") { passo ->
+
+            val texto = getString(passo.id, *passo.args.toTypedArray())
+            when (passo.tipoPasso) {
+                TipoPasso.TITULO -> "<font color='#B3E5FC'>👉 $texto</font>"
+                TipoPasso.EXPLICACAO -> "<font color='#B3E5FC'>🧮 $texto</font>"
+                TipoPasso.CALCULO -> texto
+                TipoPasso.RESULTADO -> "<br><b>✅ $texto</b>"
+
+            }
+        }
+
+        binding.txtPassoapasso.text =
+            Html.fromHtml(textoFinal, Html.FROM_HTML_MODE_LEGACY)
     }
 
     override fun onClick(v: View?) {

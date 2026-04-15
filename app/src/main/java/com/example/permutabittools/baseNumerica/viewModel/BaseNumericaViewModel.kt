@@ -1,15 +1,15 @@
 package com.example.permutabittools.baseNumerica.viewModel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.permutabittools.R
 import com.example.permutabittools.baseNumerica.baseNumericaModel.ConversoesRepository
 import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
-import com.example.permutabittools.dataBase.ConversoesDAO
+import com.example.permutabittools.baseNumerica.baseNumericaModel.Passo
+import com.example.permutabittools.baseNumerica.baseNumericaModel.TipoPasso
 import com.example.permutabittools.dataBase.ConversoesDataBase
-import com.example.permutabittools.dataBase.PermutaDataBase
 import kotlinx.coroutines.launch
-import java.lang.Math.pow
-import kotlin.math.pow
 import kotlin.text.iterator
 
 class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewModel() {
@@ -54,7 +54,7 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
 
     }
 
-    fun calcularEmostrarConversao(baseOrigem: String, baseDestino: String, valor: String): List<String> {
+    /*fun calcularEmostrarConversao(baseOrigem: String, baseDestino: String, valor: String): List<String> {
         val passos = mutableListOf<String>()
 
         var tamanho: Int = valor.length - 1
@@ -68,16 +68,16 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
         when(destino?.name){
             "DECIMAL" -> {
                 if(origem?.name.equals("HEXADECIMAL")){
-                    passos.add("<font color = '#81C784'>\uD83D\uDC49 Converter valores HEXADECIMAIS para DECIMAIS<br></font>")
+                    passos.add("<font color = '#B3E5FC'>\uD83D\uDC49 Converter valores HEXADECIMAIS para DECIMAIS<br></font>")
                     for(i in valor){
                         var digito = i.digitToInt(16)
-                        passos.add("${i} ===> ${digito}")
+                        passos.add("${i} ➨ ${digito}")
                         algarismos.add(digito)
                     }
                 }
                 else for(i in valor) algarismos.add(i.digitToInt())
 
-                passos.add("<font color = '#81C784'><br>\uD83E\uDDEEMultilique cada digito (da esquerda para a direita), pela base numérica elevado ao número de digitos. Decremente o expoente a cada dígito operado:<br></font>")
+                passos.add("<font color = '#B3E5FC'><br>\uD83E\uDDEEMultiplique cada digito (da esquerda para a direita), pela base numérica elevado ao número de digitos. Decremente o expoente a cada dígito operado:<br></font>")
 
                 for(i in algarismos){
                     resultadoDecimal += i * potencia(base, tamanho)
@@ -92,13 +92,14 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
             else -> {
 
                 if(origem?.name.equals("HEXADECIMAL")){
-                    passos.add("<font color = '#81C784'>\uD83D\uDC49 Converter valores HEXADECIMAIS para DECIMAIS<br></font>")
+                    passos.add("<font color = '#B3E5FC'>\uD83D\uDC49 Converter valores HEXADECIMAIS para DECIMAIS<br></font>")
+
                     for(i in valor){
                         var digito = i.digitToInt(16)
-                        passos.add("${i} ===> ${digito}")
+                        passos.add("${i} ➨ ${digito}")
                         algarismos.add(digito)
                     }
-                    passos.add("<font color = '#81C784'><br>\uD83E\uDDEEMultilique cada digito (da esquerda para a direita), pela base numérica elevado ao número de digitos. Decremente o expoente a cada dígito operado:<br></font>")
+                    passos.add("<font color = '#B3E5FC'><br>\uD83E\uDDEEMultiplique cada digito (da esquerda para a direita), pela base numérica elevado ao número de digitos. Decremente o expoente a cada dígito operado:<br></font>")
 
                     for(i in algarismos){
                         resultadoDecimal += i * potencia(base, tamanho)
@@ -116,7 +117,7 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
                 }
                 else{
                     for(i in valor) algarismos.add(i.digitToInt())
-                    passos.add("<font color = '#81C784'>\uD83E\uDDEEMultilique cada digito (da esquerda para a direita), pela base numérica elevado ao número de digitos. Decremente o expoente a cada dígito operado:<br></font>")
+                    passos.add("<font color = '#B3E5FC'>\uD83E\uDDEEMultilique cada digito (da esquerda para a direita), pela base numérica elevado ao número de digitos. Decremente o expoente a cada dígito operado:<br></font>")
 
                     for(i in algarismos){
                         resultadoDecimal += i * potencia(base, tamanho)
@@ -128,9 +129,7 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
                     }
                     passos.add("<br>Decimal = ${resultadoDecimal}<br>")
                 }
-
-                passos.add("\uD83D\uDC49 Converta de DECIMAL para a base ${destino?.name}<br>")
-                passos.add("<font color = '#81C784'>\uD83D\uDCC9 Faça divisões sucessivas pela base de destino e pegue os restos<br></font>")
+                passos.add("<font color = '#B3E5FC'>\uD83D\uDCC9 Faça divisões sucessivas pela base de destino e pegue os restos<br></font>")
 
                 var numero = resultadoDecimal
                 val restos = mutableListOf<String>()
@@ -142,12 +141,12 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
 
                     if(resto > 9 && resto < 16){
                         restoString = resto.toString(16).uppercase()
-                        passos.add("${numero} ÷ ${destino!!.raiz} = ${quociente}  ===>  Resto: ${resto} >>> ${restoString}")
+                        passos.add("${numero} ÷ ${destino!!.raiz} = ${quociente}  ➨  Resto: ${resto} ➤ ${restoString}")
                         restos.add(restoString)
                     }
                     else{
                         restoString = resto.toString().uppercase()
-                        passos.add("${numero} ÷ ${destino!!.raiz} = ${quociente}  ===>  Resto: ${resto}")
+                        passos.add("${numero} ÷ ${destino!!.raiz} = ${quociente}  ➨  Resto: ${resto}")
                         restos.add(restoString)
                     }
                     numero = quociente
@@ -155,10 +154,220 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
 
                 val resultado = restos.reversed().joinToString("")
 
-                passos.add("<font color = '#81C784'><br>\uD83D\uDC49 Leia os restos de baixo para cima<br></font>")
+                passos.add("<font color = '#B3E5FC'><br>\uD83D\uDC49 Leia os restos de baixo para cima<br></font>")
                 passos.add("✅ Resultado final: ${resultado}")
             }
         }
+        return passos
+    }*/
+
+    fun calcularEmostrarConversao(baseOrigem: String, baseDestino: String, valor: String): List<Passo> {
+
+        val passos = mutableListOf<Passo>()
+        var tamanho = valor.length - 1
+        var resultadoDecimal = 0
+
+        origem = mapearBases(baseOrigem)
+        destino = mapearBases(baseDestino)
+
+        val base = origem!!.raiz
+
+        when (destino?.name) {
+            "DECIMAL" -> {
+                if (origem?.name == "HEXADECIMAL") {
+                    passos.add(
+                        Passo(R.string.passo_hex_para_decimal, tipoPasso = TipoPasso.TITULO)
+                    )
+                    for (i in valor) {
+                        val digito = i.digitToInt(16)
+                        passos.add(
+                            Passo(
+                                R.string.passo_digito_convertido,
+                                listOf(i.toString(), digito),
+                                TipoPasso.CALCULO
+                            )
+                        )
+                        algarismos.add(digito)
+                    }
+                } else {
+                    for (i in valor) algarismos.add(i.digitToInt())
+                }
+
+                passos.add(
+                    Passo(R.string.passo_multiplicacao, tipoPasso = TipoPasso.EXPLICACAO)
+                )
+
+                for (i in algarismos) {
+
+                    resultadoDecimal += i * potencia(base, tamanho)
+
+                    val resId = if (tamanho != 0)
+                        R.string.passo_potencia_soma
+                    else
+                        R.string.passo_potencia
+
+                    passos.add(
+                        Passo(
+                            resId,
+                            listOf(i, base, tamanho),
+                            TipoPasso.CALCULO
+                        )
+                    )
+
+                    tamanho--
+                }
+
+                passos.add(
+                    Passo(
+                        R.string.resultado_decimal,
+                        listOf(resultadoDecimal),
+                        TipoPasso.RESULTADO
+                    )
+                )
+            }
+
+            else -> {
+
+                if (origem?.name == "HEXADECIMAL") {
+                    passos.add(
+                        Passo(R.string.passo_hex_para_decimal, tipoPasso = TipoPasso.TITULO)
+                    )
+                    for (i in valor) {
+                        val digito = i.digitToInt(16)
+                        passos.add(
+                            Passo(
+                                R.string.passo_digito_convertido,
+                                listOf(i.toString(), digito),
+                                TipoPasso.CALCULO
+                            )
+                        )
+
+                        algarismos.add(digito)
+                    }
+                    passos.add(
+                        Passo(R.string.passo_multiplicacao, tipoPasso = TipoPasso.EXPLICACAO)
+                    )
+                    for (i in algarismos) {
+                        resultadoDecimal += i * potencia(base, tamanho)
+                        val resId = if (tamanho != 0)
+                            R.string.passo_potencia_soma
+                        else
+                            R.string.passo_potencia
+
+                        passos.add(
+                            Passo(resId, listOf(i, base, tamanho), TipoPasso.CALCULO)
+                        )
+                        tamanho--
+                    }
+
+                    passos.add(
+                        Passo(
+                            R.string.resultado_parcial_decimal,
+                            listOf(resultadoDecimal),
+                            TipoPasso.RESULTADO
+                        )
+                    )
+                }
+
+                else if (origem?.name == "DECIMAL") {
+                    resultadoDecimal = valor.toInt()
+                    passos.add(
+                        Passo(R.string.resultado_parcial_decimal, listOf(resultadoDecimal), TipoPasso.RESULTADO)
+                    )
+                }
+
+                else {
+                    for (i in valor) algarismos.add(i.digitToInt())
+                    passos.add(
+                        Passo(R.string.passo_multiplicacao, tipoPasso = TipoPasso.EXPLICACAO)
+                    )
+
+                    for (i in algarismos) {
+
+                        resultadoDecimal += i * potencia(base, tamanho)
+
+                        val resId = if (tamanho != 0)
+                            R.string.passo_potencia_soma
+                        else
+                            R.string.passo_potencia
+
+                        passos.add(
+                            Passo(
+                                resId,
+                                listOf(i, base, tamanho),
+                                TipoPasso.CALCULO
+                            )
+                        )
+
+                        tamanho--
+                    }
+
+                    passos.add(
+                        Passo(
+                            R.string.resultado_parcial_decimal,
+                            listOf(resultadoDecimal),
+                            TipoPasso.RESULTADO
+                        )
+                    )
+                }
+
+                passos.add(
+                    Passo(R.string.passo_divisoes, tipoPasso = TipoPasso.EXPLICACAO)
+                )
+
+                var numero = resultadoDecimal
+                val restos = mutableListOf<String>()
+
+                while (numero > 0) {
+
+                    val quociente = numero / destino!!.raiz
+                    val resto = numero % destino!!.raiz
+
+                    if (resto > 9 && resto < 16) {
+
+                        val restoString = resto.toString(16).uppercase()
+
+                        passos.add(
+                            Passo(
+                                R.string.passo_divisao_hex,
+                                listOf(numero, destino!!.raiz, quociente, resto, restoString),
+                                TipoPasso.CALCULO
+                            )
+                        )
+
+                        restos.add(restoString)
+                    } else {
+
+                        passos.add(
+                            Passo(
+                                R.string.passo_divisao,
+                                listOf(numero, destino!!.raiz, quociente, resto),
+                                TipoPasso.CALCULO
+                            )
+                        )
+
+                        restos.add(resto.toString())
+                    }
+
+                    numero = quociente
+                }
+
+                val resultado = restos.reversed().joinToString("")
+
+                passos.add(
+                    Passo(R.string.passo_leitura_restos, tipoPasso = TipoPasso.EXPLICACAO)
+                )
+
+                passos.add(
+                    Passo(
+                        R.string.resultado_final_string,
+                        listOf(resultado),
+                        TipoPasso.RESULTADO
+                    )
+                )
+            }
+        }
+
         return passos
     }
 
