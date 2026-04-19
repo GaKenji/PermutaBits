@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_fragment_bases_numericas"
-    tools:context=".baseNumerica.view.BaseNumericaFragment">
+    tools:context=".views.BaseNumericaFragment">
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -14,7 +14,7 @@
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:hint="De..."
+        android:hint="  De..."
 
         app:boxBackgroundColor="@android:color/transparent"
         app:boxBackgroundMode="outline"
@@ -44,7 +44,7 @@
         android:id="@+id/textInputDropDownSaida"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:hint="Para..."
+        android:hint="  Para..."
 
         app:boxBackgroundColor="@android:color/transparent"
         app:boxBackgroundMode="outline"

@@ -1,4 +1,4 @@
-package com.example.permutabittools.baseNumerica.view
+package com.example.permutabittools.views
 
 import android.content.Context
 import android.os.Bundle
@@ -14,14 +14,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.permutabittools.R
-import com.example.permutabittools.baseNumerica.baseNumericaModel.ConversoesRepository
-import com.example.permutabittools.baseNumerica.view.HIstoricoAdapter
-import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
-import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModel
-import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModelFactory
+import com.example.permutabittools.models.ConversoesRepository
+import com.example.permutabittools.models.NumericBase
+import com.example.permutabittools.views.HIstoricoAdapter
 import com.example.permutabittools.dataBase.ConversoesDataBase
 import com.example.permutabittools.dataBase.PermutaDataBase
 import com.example.permutabittools.databinding.FragmentBasenumericaBinding
+import com.example.permutabittools.viewModels.BaseNumericaViewModel
+import com.example.permutabittools.viewModels.BaseNumericaViewModelFactory
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -45,7 +45,7 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dao = PermutaDataBase.getDataBase(requireContext()).conversaoDao()
+        val dao = PermutaDataBase.Companion.getDataBase(requireContext()).conversaoDao()
         val repository = ConversoesRepository(dao)
         val factory = BaseNumericaViewModelFactory(repository)
 
@@ -54,15 +54,29 @@ class BaseNumericaFragment : Fragment(), View.OnClickListener{
         carregarExposedDropDowns() //Carrega o conteúdo dos spinners
 
         //Instanciando o adapter do Histórico com seu evento de clique
-        historicoAdapter = HIstoricoAdapter { conversoes ->
-            val bundle = Bundle()
-            bundle.putSerializable("conversaoSelecionada", conversoes)
+        historicoAdapter = HIstoricoAdapter(
+            { conversoes ->
+                val bundle = Bundle()
+                bundle.putSerializable("conversaoSelecionada", conversoes)
 
-            findNavController().navigate(
-                R.id
-                    .action_nav_basesNumericas_to_nav_calculoBasesNumericas, bundle
-            )
-        }
+                findNavController().navigate(
+                    R.id
+                        .action_nav_basesNumericas_to_nav_calculoBasesNumericas, bundle
+                )
+            },
+            { conversoes ->
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.alerta_titulo_deletar_Item))
+                    .setMessage(getString(R.string.alerta_deletar_item))
+                    .setPositiveButton(getString(R.string.oK)) { dialog, which ->
+                        lifecycleScope.launch {
+                            viewModel.deleteItem(conversoes)
+                        }
+                    }
+                    .setNegativeButton(getString(R.string.cancelar), null)
+                    .show()
+            }
+        )
 
         binding.recyclerHistoricoBasesNumericas.layoutManager =
             LinearLayoutManager(requireContext())

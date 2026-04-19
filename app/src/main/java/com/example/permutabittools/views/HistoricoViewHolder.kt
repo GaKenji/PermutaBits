@@ -1,4 +1,4 @@
-package com.example.permutabittools.baseNumerica.view
+package com.example.permutabittools.views
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.permutabittools.dataBase.ConversoesDataBase

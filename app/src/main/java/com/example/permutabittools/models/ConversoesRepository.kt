@@ -1,4 +1,4 @@
-package com.example.permutabittools.baseNumerica.baseNumericaModel
+package com.example.permutabittools.models
 
 import com.example.permutabittools.dataBase.ConversoesDAO
 import com.example.permutabittools.dataBase.ConversoesDataBase
@@ -8,6 +8,10 @@ class ConversoesRepository(private val dao: ConversoesDAO) {
 
     suspend fun inserir(conversao: ConversoesDataBase){
         dao.inserirConversao(conversao)
+    }
+
+    suspend fun deletarItem(conv: ConversoesDataBase){
+        dao.deleteItem(conv)
     }
 
     suspend fun deletar(){

@@ -1,4 +1,6 @@
-package com.example.permutabittools.baseNumerica.baseNumericaModel
+package com.example.permutabittools.models
+
+import com.example.permutabittools.models.TipoPasso
 
 data class Passo(
     val id: Int,

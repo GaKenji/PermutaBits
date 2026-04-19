@@ -1,4 +1,4 @@
-package com.example.permutabittools.baseNumerica.view
+package com.example.permutabittools.views
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -13,14 +13,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.permutabittools.R
-import com.example.permutabittools.baseNumerica.baseNumericaModel.ConversoesRepository
-import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
-import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModel
-import com.example.permutabittools.baseNumerica.viewModel.BaseNumericaViewModelFactory
+import com.example.permutabittools.models.ConversoesRepository
+import com.example.permutabittools.models.TipoPasso
 import com.example.permutabittools.dataBase.ConversoesDataBase
 import com.example.permutabittools.dataBase.PermutaDataBase
 import com.example.permutabittools.databinding.FragmentCalculoBaseNumericaBinding
-import com.example.permutabittools.baseNumerica.baseNumericaModel.TipoPasso
+import com.example.permutabittools.viewModels.BaseNumericaViewModel
+import com.example.permutabittools.viewModels.BaseNumericaViewModelFactory
 
 class CalculoBaseNumerica : Fragment(), View.OnClickListener {
 
@@ -42,11 +41,11 @@ class CalculoBaseNumerica : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dao = PermutaDataBase.getDataBase(requireContext()).conversaoDao()
+        val dao = PermutaDataBase.Companion.getDataBase(requireContext()).conversaoDao()
         val repository = ConversoesRepository(dao)
         val factory = BaseNumericaViewModelFactory(repository)
 
-        viewModel = ViewModelProvider(this,factory).get(BaseNumericaViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(BaseNumericaViewModel::class.java)
 
         receberDadosConversao() //Recebo os dados da fragment
         mostrarDadosConversao() //Exibo os dados na parte superior da fragment

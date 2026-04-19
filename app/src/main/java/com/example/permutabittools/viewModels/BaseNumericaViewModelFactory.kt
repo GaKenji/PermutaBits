@@ -1,11 +1,12 @@
-package com.example.permutabittools.baseNumerica.viewModel
+package com.example.permutabittools.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.permutabittools.baseNumerica.baseNumericaModel.ConversoesRepository
+import com.example.permutabittools.models.ConversoesRepository
 
 class BaseNumericaViewModelFactory(
-    private val repository: ConversoesRepository): ViewModelProvider.Factory {
+    private val repository: ConversoesRepository
+): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(BaseNumericaViewModel::class.java)){

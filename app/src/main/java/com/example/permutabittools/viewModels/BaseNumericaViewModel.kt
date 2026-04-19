@@ -1,13 +1,12 @@
-package com.example.permutabittools.baseNumerica.viewModel
+package com.example.permutabittools.viewModels
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.permutabittools.R
-import com.example.permutabittools.baseNumerica.baseNumericaModel.ConversoesRepository
-import com.example.permutabittools.baseNumerica.baseNumericaModel.NumericBase
-import com.example.permutabittools.baseNumerica.baseNumericaModel.Passo
-import com.example.permutabittools.baseNumerica.baseNumericaModel.TipoPasso
+import com.example.permutabittools.models.ConversoesRepository
+import com.example.permutabittools.models.NumericBase
+import com.example.permutabittools.models.Passo
+import com.example.permutabittools.models.TipoPasso
 import com.example.permutabittools.dataBase.ConversoesDataBase
 import kotlinx.coroutines.launch
 import kotlin.text.iterator
@@ -272,7 +271,11 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
                 else if (origem?.name == "DECIMAL") {
                     resultadoDecimal = valor.toInt()
                     passos.add(
-                        Passo(R.string.resultado_parcial_decimal, listOf(resultadoDecimal), TipoPasso.RESULTADO)
+                        Passo(
+                            R.string.resultado_parcial_decimal,
+                            listOf(resultadoDecimal),
+                            TipoPasso.RESULTADO
+                        )
                     )
                 }
 
@@ -382,6 +385,12 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
     fun inserir(conversao: ConversoesDataBase){
         viewModelScope.launch {
             repository.inserir(conversao)
+        }
+    }
+
+    fun deleteItem(conv: ConversoesDataBase){
+        viewModelScope.launch {
+            repository.deletarItem(conv)
         }
     }
 

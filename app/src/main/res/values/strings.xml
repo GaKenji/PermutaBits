@@ -8,8 +8,8 @@
 
     <string name="menu_BaseNumerica">Bases numéricas</string>
     <string name="menu_CalculoBaseNumerica">Cálculo de conversão</string>
-    <string name="menu_gallery">Em desenvolvimento...</string>
-    <string name="menu_slideshow">Em desenvolvomento...</string>
+    <string name="menu_mascara_de_rede">Máscara de rede</string>
+    <string name="menu_validador_logica">Validador de Expressões Lógicas</string>
 
     <!--Fragment bases numericas-->
     <string-array name="bases_numericas">
@@ -25,8 +25,11 @@
     <string name="alerta_valor_invalido">❌ Valor inválido!</string>
     <string name="alerta_bases_iguais">❌ Bases iguais selecionadas!</string>
     <string name="alerta_deletar_dados">Deseja apagar o histórico de conversões?</string>
+    <string name="alerta_deletar_item">Deseja apagar este item do histórico?</string>
     <string name="alerta_titulo_deletar_dados">⚠️Seu histórico será apagado!</string>
+    <string name="alerta_titulo_deletar_Item">⚠️Este item será apagado!</string>
 
+    <!--Textos Fragment de bases numéricas-->
     <string name="entendi">Ok, endendi!</string>
     <string name="oK">Ok</string>
     <string name="cancelar">Cancelar</string>
