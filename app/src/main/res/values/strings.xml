@@ -8,7 +8,8 @@
 
     <string name="menu_BaseNumerica">Bases numéricas</string>
     <string name="menu_CalculoBaseNumerica">Cálculo de conversão</string>
-    <string name="menu_mascara_de_rede">Máscara de rede</string>
+    <string name="rede_ipv4">Cálculo de redes IPv4</string>
+    <string name="rede_ipv6">Cálculo de redes IPv6</string>
     <string name="menu_validador_logica">Validador de Expressões Lógicas</string>
 
     <!--Fragment bases numericas-->
@@ -63,5 +64,17 @@
     <string name="passo_divisao">%1$d ÷ %2$d = %3$d ➨ Resto: %4$d</string>
     <string name="passo_leitura_restos">Leia os restos de baixo para cima</string>
     <string name="resultado_final_string">Resultado final: %1$s</string>
+
+
+    <!--=============IPv4 STRINGS RESOURCES==============-->
+    <string-array name="modes">
+        <item>IP/CIDR</item>
+        <item>Máscaras</item>
+        <item>Hosts</item>
+        <item>VLSM</item>
+    </string-array>
+
+    <string name="ip_invalido">❌ Ip inválido!</string>
+    <string name="selecione_cidr">❌ Selecione um CIDR</string>
 
 </resources>

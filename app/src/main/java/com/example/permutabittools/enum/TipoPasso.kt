@@ -1,4 +1,4 @@
-package com.example.permutabittools.models
+package com.example.permutabittools.enum
 
 enum class TipoPasso {
     EXPLICACAO,

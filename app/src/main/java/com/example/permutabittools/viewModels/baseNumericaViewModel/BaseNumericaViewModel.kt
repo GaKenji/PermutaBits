@@ -1,13 +1,13 @@
-package com.example.permutabittools.viewModels
+package com.example.permutabittools.viewModels.baseNumericaViewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.permutabittools.R
-import com.example.permutabittools.models.ConversoesRepository
-import com.example.permutabittools.models.NumericBase
-import com.example.permutabittools.models.Passo
-import com.example.permutabittools.models.TipoPasso
 import com.example.permutabittools.dataBase.ConversoesDataBase
+import com.example.permutabittools.repository.ConversoesRepository
+import com.example.permutabittools.enum.NumericBase
+import com.example.permutabittools.models.Passo
+import com.example.permutabittools.enum.TipoPasso
 import kotlinx.coroutines.launch
 import kotlin.text.iterator
 
@@ -38,10 +38,10 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
             /*Primeiro passo da conversão
             Pega o valor da textView e depois converte para decimal
             Pegua a string valor que está na base radix e devolve um decimal equivalente*/
-            NumericBase.BINARIO -> valorEntrada.toInt(2)
-            NumericBase.OCTAL -> valorEntrada.toInt(8)
-            NumericBase.DECIMAL -> valorEntrada.toInt(10)
-            NumericBase.HEXADECIMAL -> valorEntrada.toInt(16)
+            NumericBase.BINARIO -> valorEntrada.toLong(2)
+            NumericBase.OCTAL -> valorEntrada.toLong(8)
+            NumericBase.DECIMAL -> valorEntrada.toLong(10)
+            NumericBase.HEXADECIMAL -> valorEntrada.toLong(16)
         }
 
         return when(baseDestino!!){
@@ -53,115 +53,7 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
 
     }
 
-    /*fun calcularEmostrarConversao(baseOrigem: String, baseDestino: String, valor: String): List<String> {
-        val passos = mutableListOf<String>()
-
-        var tamanho: Int = valor.length - 1
-        var resultadoDecimal: Int = 0
-
-        origem = mapearBases(baseOrigem)
-        destino = mapearBases(baseDestino)
-
-        val base = origem!!.raiz
-
-        when(destino?.name){
-            "DECIMAL" -> {
-                if(origem?.name.equals("HEXADECIMAL")){
-                    passos.add("<font color = '#B3E5FC'>\uD83D\uDC49 Converter valores HEXADECIMAIS para DECIMAIS<br></font>")
-                    for(i in valor){
-                        var digito = i.digitToInt(16)
-                        passos.add("${i} ➨ ${digito}")
-                        algarismos.add(digito)
-                    }
-                }
-                else for(i in valor) algarismos.add(i.digitToInt())
-
-                passos.add("<font color = '#B3E5FC'><br>\uD83E\uDDEEMultiplique cada digito (da esquerda para a direita), pela base numérica elevado ao número de digitos. Decremente o expoente a cada dígito operado:<br></font>")
-
-                for(i in algarismos){
-                    resultadoDecimal += i * potencia(base, tamanho)
-
-                    if(tamanho != 0) passos.add("( ${i} X ${base}<sup><small>${tamanho}</small></sup> ) + ")
-                    else passos.add("( ${i} X ${base}<sup><small>${tamanho}</small></sup> )")
-
-                    tamanho--
-                }
-                passos.add("<br>✅ Resultado Final: ${resultadoDecimal}<br>")
-            }
-            else -> {
-
-                if(origem?.name.equals("HEXADECIMAL")){
-                    passos.add("<font color = '#B3E5FC'>\uD83D\uDC49 Converter valores HEXADECIMAIS para DECIMAIS<br></font>")
-
-                    for(i in valor){
-                        var digito = i.digitToInt(16)
-                        passos.add("${i} ➨ ${digito}")
-                        algarismos.add(digito)
-                    }
-                    passos.add("<font color = '#B3E5FC'><br>\uD83E\uDDEEMultiplique cada digito (da esquerda para a direita), pela base numérica elevado ao número de digitos. Decremente o expoente a cada dígito operado:<br></font>")
-
-                    for(i in algarismos){
-                        resultadoDecimal += i * potencia(base, tamanho)
-
-                        if(tamanho != 0) passos.add("( ${i} X ${base}<sup><small>${tamanho}</small></sup> ) + ")
-                        else passos.add("( ${i} X ${base}<sup><small>${tamanho}</small></sup> ) = ")
-
-                        tamanho--
-                    }
-                    passos.add("Decimal = ${resultadoDecimal}<br>")
-                }
-                else if(origem?.name.equals("DECIMAL")){
-                    resultadoDecimal = valor.toInt()
-                    passos.add("Decimal = ${resultadoDecimal}<br>")
-                }
-                else{
-                    for(i in valor) algarismos.add(i.digitToInt())
-                    passos.add("<font color = '#B3E5FC'>\uD83E\uDDEEMultilique cada digito (da esquerda para a direita), pela base numérica elevado ao número de digitos. Decremente o expoente a cada dígito operado:<br></font>")
-
-                    for(i in algarismos){
-                        resultadoDecimal += i * potencia(base, tamanho)
-
-                        if(tamanho != 0) passos.add("( ${i} X ${base}<sup><small>${tamanho}</small></sup> ) + ")
-                        else passos.add("( ${i} X ${base}<sup><small>${tamanho}</small></sup>")
-
-                        tamanho--
-                    }
-                    passos.add("<br>Decimal = ${resultadoDecimal}<br>")
-                }
-                passos.add("<font color = '#B3E5FC'>\uD83D\uDCC9 Faça divisões sucessivas pela base de destino e pegue os restos<br></font>")
-
-                var numero = resultadoDecimal
-                val restos = mutableListOf<String>()
-
-                while(numero > 0){
-                    val quociente = numero/destino!!.raiz
-                    val resto = numero % destino!!.raiz
-                    val restoString: String
-
-                    if(resto > 9 && resto < 16){
-                        restoString = resto.toString(16).uppercase()
-                        passos.add("${numero} ÷ ${destino!!.raiz} = ${quociente}  ➨  Resto: ${resto} ➤ ${restoString}")
-                        restos.add(restoString)
-                    }
-                    else{
-                        restoString = resto.toString().uppercase()
-                        passos.add("${numero} ÷ ${destino!!.raiz} = ${quociente}  ➨  Resto: ${resto}")
-                        restos.add(restoString)
-                    }
-                    numero = quociente
-                }
-
-                val resultado = restos.reversed().joinToString("")
-
-                passos.add("<font color = '#B3E5FC'><br>\uD83D\uDC49 Leia os restos de baixo para cima<br></font>")
-                passos.add("✅ Resultado final: ${resultado}")
-            }
-        }
-        return passos
-    }*/
-
     fun calcularEmostrarConversao(baseOrigem: String, baseDestino: String, valor: String): List<Passo> {
-
         val passos = mutableListOf<Passo>()
         var tamanho = valor.length - 1
         var resultadoDecimal = 0
@@ -191,15 +83,12 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
                 } else {
                     for (i in valor) algarismos.add(i.digitToInt())
                 }
-
                 passos.add(
                     Passo(R.string.passo_multiplicacao, tipoPasso = TipoPasso.EXPLICACAO)
                 )
 
                 for (i in algarismos) {
-
                     resultadoDecimal += i * potencia(base, tamanho)
-
                     val resId = if (tamanho != 0)
                         R.string.passo_potencia_soma
                     else
@@ -212,7 +101,6 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
                             TipoPasso.CALCULO
                         )
                     )
-
                     tamanho--
                 }
 
@@ -351,16 +239,13 @@ class BaseNumericaViewModel(private val repository: ConversoesRepository): ViewM
 
                         restos.add(resto.toString())
                     }
-
                     numero = quociente
                 }
 
                 val resultado = restos.reversed().joinToString("")
-
                 passos.add(
                     Passo(R.string.passo_leitura_restos, tipoPasso = TipoPasso.EXPLICACAO)
                 )
-
                 passos.add(
                     Passo(
                         R.string.resultado_final_string,

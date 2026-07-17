@@ -1,6 +1,6 @@
 package com.example.permutabittools.models
 
-import com.example.permutabittools.models.TipoPasso
+import com.example.permutabittools.enum.TipoPasso
 
 data class Passo(
     val id: Int,

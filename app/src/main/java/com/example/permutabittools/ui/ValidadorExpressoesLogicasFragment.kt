@@ -1,4 +1,4 @@
-package com.example.permutabittools.views
+package com.example.permutabittools.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,9 +13,6 @@ import com.example.permutabittools.viewModels.ExpressoesLogicasViewModel
 class ValidadorExpressoesLogicasFragment : Fragment() {
 
     private var _binding: FragmentValidadorLogicaBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(

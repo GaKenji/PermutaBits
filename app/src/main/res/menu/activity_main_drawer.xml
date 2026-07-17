@@ -9,11 +9,15 @@
             android:icon="@drawable/ic_numeric_base"
             android:title="@string/menu_BaseNumerica" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_ipv4"
             android:icon="@drawable/ic_redes"
-            android:title="@string/menu_mascara_de_rede" />
+            android:title="@string/rede_ipv4" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_ipv6"
+            android:icon="@drawable/ic_redes"
+            android:title="@string/rede_ipv6" />
+        <item
+            android:id="@+id/nav_validador_logica"
             android:icon="@drawable/ic_validador_expressoes_logicas"
             android:title="@string/menu_validador_logica" />
     </group>

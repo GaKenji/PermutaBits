@@ -1,4 +1,4 @@
-package com.example.permutabittools.views
+package com.example.permutabittools.ui.basesNumericasFragments
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -13,15 +13,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.permutabittools.R
-import com.example.permutabittools.models.ConversoesRepository
-import com.example.permutabittools.models.TipoPasso
 import com.example.permutabittools.dataBase.ConversoesDataBase
 import com.example.permutabittools.dataBase.PermutaDataBase
 import com.example.permutabittools.databinding.FragmentCalculoBaseNumericaBinding
-import com.example.permutabittools.viewModels.BaseNumericaViewModel
-import com.example.permutabittools.viewModels.BaseNumericaViewModelFactory
+import com.example.permutabittools.repository.ConversoesRepository
+import com.example.permutabittools.enum.TipoPasso
+import com.example.permutabittools.viewModels.baseNumericaViewModel.BaseNumericaViewModel
+import com.example.permutabittools.viewModels.baseNumericaViewModel.BaseNumericaViewModelFactory
 
-class CalculoBaseNumerica : Fragment(), View.OnClickListener {
+class CalculoBaseNumericaFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentCalculoBaseNumericaBinding? = null
     private val binding get() = _binding!!

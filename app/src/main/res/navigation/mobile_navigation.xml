@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_basesNumericas"
-        android:name="com.example.permutabittools.views.BaseNumericaFragment"
+        android:name="com.example.permutabittools.ui.basesNumericasFragments.BaseNumericaFragment"
         android:label="@string/menu_BaseNumerica"
         tools:layout="@layout/fragment_basenumerica">
 
@@ -18,20 +18,26 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.permutabittools.views.MascaraRedesFragment"
-        android:label="@string/menu_mascara_de_rede"
-        tools:layout="@layout/fragment_mascara_de_rede" />
+        android:id="@+id/nav_ipv4"
+        android:name="com.example.permutabittools.ui.Ipv4Fragments.MascaraRedesIPv4Fragment"
+        android:label="@string/rede_ipv4"
+        tools:layout="@layout/fragment_mascara_de_rede_ipv4" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.permutabittools.views.ValidadorExpressoesLogicasFragment"
+        android:id="@+id/nav_ipv6"
+        android:name="com.example.permutabittools.ui.MascaraDeRedesIpv6Fragment"
+        android:label="@string/rede_ipv6"
+        tools:layout="@layout/fragment_mascara_de_rede_ipv6" />
+
+    <fragment
+        android:id="@+id/nav_validador_logica"
+        android:name="com.example.permutabittools.ui.ValidadorExpressoesLogicasFragment"
         android:label="@string/menu_validador_logica"
         tools:layout="@layout/fragment_validador_logica" />
 
     <fragment
         android:id="@+id/nav_calculoBasesNumericas"
-        android:name="com.example.permutabittools.views.CalculoBaseNumerica"
+        android:name="com.example.permutabittools.ui.basesNumericasFragments.CalculoBaseNumericaFragment"
         android:label="@string/menu_CalculoBaseNumerica"
         tools:layout="@layout/fragment_calculo_base_numerica"/>
 </navigation>

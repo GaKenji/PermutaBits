@@ -1,4 +1,4 @@
-package com.example.permutabittools.views
+package com.example.permutabittools.ui.adapters
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.permutabittools.dataBase.ConversoesDataBase

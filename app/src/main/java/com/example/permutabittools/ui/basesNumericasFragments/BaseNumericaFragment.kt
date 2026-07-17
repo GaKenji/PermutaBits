@@ -1,4 +1,4 @@
-package com.example.permutabittools.views
+package com.example.permutabittools.ui.basesNumericasFragments
 
 import android.content.Context
 import android.os.Bundle
@@ -14,14 +14,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.permutabittools.R
-import com.example.permutabittools.models.ConversoesRepository
-import com.example.permutabittools.models.NumericBase
-import com.example.permutabittools.views.HIstoricoAdapter
 import com.example.permutabittools.dataBase.ConversoesDataBase
 import com.example.permutabittools.dataBase.PermutaDataBase
 import com.example.permutabittools.databinding.FragmentBasenumericaBinding
-import com.example.permutabittools.viewModels.BaseNumericaViewModel
-import com.example.permutabittools.viewModels.BaseNumericaViewModelFactory
+import com.example.permutabittools.repository.ConversoesRepository
+import com.example.permutabittools.enum.NumericBase
+import com.example.permutabittools.ui.adapters.HIstoricoAdapter
+import com.example.permutabittools.viewModels.baseNumericaViewModel.BaseNumericaViewModel
+import com.example.permutabittools.viewModels.baseNumericaViewModel.BaseNumericaViewModelFactory
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

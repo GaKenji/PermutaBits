@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/CinzaEscuro"
+    tools:context=".ui.Ipv4Fragments.Ipv4CidrFragment">
+
+    <TextView
+        android:id="@+id/txtCIDR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CIDR"
+        android:textColor="@color/CianoClaro"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@id/boxDropSubRede"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp" />
+
+
+    <TextView
+        android:id="@+id/txtEndIPv4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Endereço IPv4"
+        android:textColor="@color/CianoClaro"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInputEnderecoIPv4"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/white"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxBackgroundMode="outline"
+        app:boxCollapsedPaddingTop="4dp"
+        app:boxStrokeColor="@color/box_stroke_color"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintTextColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtEndIPv4"
+        android:layout_marginStart="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextInputIpv4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:inputType="text"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/boxDropSubRede"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/box_stroke_color"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:endIconMode="dropdown_menu"
+        app:endIconTint="@color/CianoClaro"
+        app:hintTextColor="@color/CianoClaro"
+        android:textColorHint="@color/white"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtCIDR"
+        android:layout_marginEnd="16dp">
+
+
+        <AutoCompleteTextView
+            android:id="@+id/exposedDropDownCIDR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:inputType="none"
+            android:textColor="@color/white" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCalcularSubnet"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/boxDropSubRede"
+        android:layout_marginTop="16dp"
+
+        android:text="Calcular Subnet"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+
+        app:rippleColor="@color/Azul"
+        app:cornerRadius="12dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/AzulClaro"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollSubnet"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/CianoClaro"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/scrollSubnet"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/CianoClaro"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="204dp"
+        app:layout_constraintBottom_toBottomOf="@id/scrollSubnet"
+        app:layout_constraintTop_toTopOf="@id/scrollSubnet"
+        app:layout_constraintEnd_toStartOf="@id/scrollSubnet"
+        android:layout_marginTop="2dp"
+        android:background="@color/CianoClaro"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="204dp"
+        app:layout_constraintBottom_toBottomOf="@id/scrollSubnet"
+        app:layout_constraintTop_toTopOf="@id/scrollSubnet"
+        app:layout_constraintStart_toEndOf="@id/scrollSubnet"
+        android:layout_marginTop="2dp"
+        android:background="@color/CianoClaro"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollSubnet"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCalcularSubnet"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <TextView
+            android:id="@+id/textRespostaSubnet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

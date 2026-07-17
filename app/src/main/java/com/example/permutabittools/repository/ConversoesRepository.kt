@@ -1,4 +1,4 @@
-package com.example.permutabittools.models
+package com.example.permutabittools.repository
 
 import com.example.permutabittools.dataBase.ConversoesDAO
 import com.example.permutabittools.dataBase.ConversoesDataBase

@@ -5,18 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/CinzaEscuro"
-    tools:context=".ui.ValidadorExpressoesLogicasFragment">
+    tools:context=".ui.Ipv4Fragments.Ipv4VlsmFragment">
 
     <TextView
-        android:id="@+id/text_slideshow"
-        android:layout_width="match_parent"
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Em desenvolvimento..."
-        android:textSize="20sp"
-        android:textColor="@color/CianoClaro"
+        android:text="VSLM sub-redes variadas"
+        android:textColor="@color/AzulClaro"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
