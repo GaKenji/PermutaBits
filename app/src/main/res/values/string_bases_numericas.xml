@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Menu DropDown-->
+    <string-array name="bases_numericas">
+        <item>Binário</item>
+        <item>Octal</item>
+        <item>Decimal</item>
+        <item>Hexadecimal</item>
+    </string-array>
+
+    <!--Alertas-->
+    <string name="alerta_inserir_valor">❌ Insira um valor!</string>
+    <string name="alerta_selecionar_bases">❌ Selecione as bases numéricas!</string>
+    <string name="alerta_valor_invalido">❌ Valor inválido!</string>
+    <string name="alerta_bases_iguais">❌ Bases iguais selecionadas!</string>
+    <string name="alerta_deletar_dados">Deseja apagar o histórico de conversões?</string>
+    <string name="alerta_deletar_item">Deseja apagar este item do histórico?</string>
+    <string name="alerta_titulo_deletar_dados">⚠️Seu histórico será apagado!</string>
+    <string name="alerta_titulo_deletar_Item">⚠️Este item será apagado!</string>
+
+    <!--Botoes Alert Dialogs-->
+    <string name="entendi">Ok, endendi!</string>
+    <string name="oK">Ok</string>
+    <string name="cancelar">Cancelar</string>
+
+    <!--Botões (conversões e passo a passo)-->
+    <string name="copiar">Copiar</string>
+    <string name="Converter">Converter</string>
+    <string name="apagar_Histótico">Apagar Histórico</string>
+
+    <!--Textos da tela de conversões-->
+    <string name="input_value">Valor de entrada</string>
+    <string name="resultado">Resultado</string>
+    <string name="Historico">Histórico de conversões</string>
+    <string name="lista_vazia">Nenhuma conversão realizada ainda!</string>
+
+    <!--Textos da tela de passo a passo-->
+    <string name="txtMostrarResolucao">Resolução passo a passo</string>
+
+    <!--Notificações-->
+    <string name="toast_copiar_calculos">Copiando Cálculos</string>
+
+    <!--Passo a passo cálculos-->
+    <string name="passo_hex_para_decimal">Converter valores HEXADECIMAIS para DECIMAIS</string>
+    <string name="passo_digito_convertido">%1$s ➨ %2$d</string>
+    <string name="passo_multiplicacao">Multiplique cada dígito (da esquerda para a direita) pela base numérica elevada ao número de dígitos. Decremente o expoente a cada dígito operado:</string>
+    <string name="passo_potencia_soma">( %1$d X %2$d&lt;sup&gt;&lt;small&gt;%3$d&lt;/small&gt;&lt;/sup&gt; ) + </string>
+    <string name="passo_potencia">( %1$d X %2$d&lt;sup&gt;&lt;small&gt;%3$d&lt;/small&gt;&lt;/sup&gt; )</string>
+    <string name="resultado_decimal">Resultado final: %1$d</string>
+    <string name="resultado_parcial_decimal">Decimal = %1$d</string>
+    <string name="passo_divisoes">Faça divisões sucessivas pela base de destino e pegue os restos</string>
+    <string name="passo_divisao_hex">%1$d ÷ %2$d = %3$d ➨ Resto: %4$d ➤ %5$s</string>
+    <string name="passo_divisao">%1$d ÷ %2$d = %3$d ➨ Resto: %4$d</string>
+    <string name="passo_leitura_restos">Leia os restos de baixo para cima</string>
+    <string name="resultado_final_string">Resultado final: %1$s</string>
+
+</resources>

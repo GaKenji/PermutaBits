@@ -1,6 +1,8 @@
 package com.example.permutabittools.ui.Ipv4Fragments
 
 import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.permutabittools.R
 import com.example.permutabittools.databinding.FragmentIpv4CidrBinding
@@ -46,6 +50,7 @@ class Ipv4CidrFragment : Fragment(), View.OnClickListener {
             cidr = viewModel.mapearCidr(selecionado)
         }
         binding.btnCalcularSubnet.setOnClickListener(this)
+        binding.btnCopiarSubnet.setOnClickListener(this)
     }
 
     override fun onResume() {
@@ -101,10 +106,36 @@ class Ipv4CidrFragment : Fragment(), View.OnClickListener {
                     return
                 }
 
+                //Se o endereço estiver correto, realizamos a conversão
+                //Pegamos o IP e o CIDR, mandamos para a ViewModel e ela retorna um Network Info com todas as informações
+                val infoNetwork = viewModel.calcularRede(endereco, cidr!!)
 
-                viewModel.calcularRede(endereco, cidr!!)
+                //Exibe o resultado da conversão
+                binding.textRespostaSubnet.text = HtmlCompat.fromHtml(
+                    """
+                            <font color='#B3E5FC'>${getString(R.string.enderecoIp)}:</font> ${infoNetwork.ip}<br><br>
+                            <font color='#B3E5FC'>${getString(R.string.mascara)}:</font> ${infoNetwork.mascara}<br><br><br>
+                            <font color='#B3E5FC'>${getString(R.string.enderecoRede)}:</font> ${infoNetwork.endRede}<br><br>
+                            <font color='#B3E5FC'>${getString(R.string.broadcast)}:</font> ${infoNetwork.broadcast}<br><br>
+                            <font color='#B3E5FC'>${getString(R.string.primeiroHost)}:</font> ${infoNetwork.primeiroHost}<br><br>
+                            <font color='#B3E5FC'>${getString(R.string.ultimoHost)}:</font> ${infoNetwork.ultimoHost}<br><br>
+                            <font color='#B3E5FC'>${getString(R.string.totalHost)}:</font> ${infoNetwork.totalHosts}<br><br>
+                            <font color='#B3E5FC'>${getString(R.string.hostsUtilizaveis)}:</font> ${infoNetwork.hostsUtilizaveis}<br><br>
+                            <font color='#B3E5FC'>${getString(R.string.classe)}:</font> ${infoNetwork.classeIp}<br><br>
+                            <font color='#B3E5FC'>${getString(R.string.privado)}:</font> ${infoNetwork.privado}
+                            """.trimIndent(),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
+            }
 
-                binding.textRespostaSubnet.setText("Calculando subnet: $endereco - CIDR: ${cidr?.num}")
+            R.id.btnCopiarSubnet -> {
+                val clipBoard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val texto = binding.textRespostaSubnet.text.toString()
+
+                val clip = ClipData.newPlainText("Passo a passo", texto)
+                clipBoard.setPrimaryClip(clip)
+
+                Toast.makeText(requireContext(), R.string.network_info_copiado, Toast.LENGTH_SHORT).show()
             }
         }
         esconderTeclado()

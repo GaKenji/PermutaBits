@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Menus do View Pager-->
+    <string-array name="modes">
+        <item>IP/CIDR</item>
+        <item>Máscaras</item>
+        <item>Hosts</item>
+        <item>VLSM</item>
+    </string-array>
+
+    <!--Alertas IP + CIDR-->
+    <string name="ip_invalido">❌ Ip inválido!</string>
+    <string name="selecione_cidr">❌ Selecione um CIDR</string>
+
+    <!--Botões-->
+    <string name="calculaSubnet">Calcular Subnet</string>
+
+    <!--Notificações-->
+    <string name="network_info_copiado">Informações de Ip copiadas com sucesso!</string>
+
+    <!--Resposta Network Info-->
+    <string name="enderecoIp">Endereço de Ip</string>
+    <string name="mascara">Máscara</string>
+    <string name="enderecoRede">Endereço de Rede</string>
+    <string name="broadcast">Broadcast</string>
+    <string name="primeiroHost">Primeiro Host</string>
+    <string name="ultimoHost">Ultimo Host</string>
+    <string name="totalHost">Total Host</string>
+    <string name="hostsUtilizaveis">Hosts utilizáveis</string>
+    <string name="classe">Classe</string>
+    <string name="privado">Privado</string>
+</resources>

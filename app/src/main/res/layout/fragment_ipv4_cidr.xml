@@ -102,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@id/boxDropSubRede"
         android:layout_marginTop="16dp"
 
-        android:text="Calcular Subnet"
+        android:text="@string/calculaSubnet"
         android:textStyle="bold"
         android:textColor="@color/white"
 
@@ -165,7 +165,28 @@
         <TextView
             android:id="@+id/textRespostaSubnet"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCopiarSubnet"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollSubnet"
+        android:layout_marginTop="24dp"
+
+        android:text="@string/copiar"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+
+        app:rippleColor="@color/Azul"
+        app:cornerRadius="12dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/AzulClaro"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,8 +3,9 @@ package com.example.permutabittools.models
 import java.io.Serializable
 
 data class NetworkInfo(
-    val endereco: String,
+    val ip: String,
     val mascara: String,
+    val endRede: String,
     val broadcast: String,
     val primeiroHost: String,
     val ultimoHost: String,

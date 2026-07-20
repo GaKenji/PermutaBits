@@ -90,7 +90,6 @@ class CalculoBaseNumericaFragment : Fragment(), View.OnClickListener {
                 TipoPasso.EXPLICACAO -> "<font color='#B3E5FC'>🧮 $texto</font>"
                 TipoPasso.CALCULO -> texto
                 TipoPasso.RESULTADO -> "<br><b>✅ $texto</b>"
-
             }
         }
 

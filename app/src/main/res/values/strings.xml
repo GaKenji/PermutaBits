@@ -12,69 +12,7 @@
     <string name="rede_ipv6">Cálculo de redes IPv6</string>
     <string name="menu_validador_logica">Validador de Expressões Lógicas</string>
 
-    <!--Fragment bases numericas-->
-    <string-array name="bases_numericas">
-        <item>Binário</item>
-        <item>Octal</item>
-        <item>Decimal</item>
-        <item>Hexadecimal</item>
-    </string-array>
-
-    <!--Alertas da Fragment de bases numéricas-->
-    <string name="alerta_inserir_valor">❌ Insira um valor!</string>
-    <string name="alerta_selecionar_bases">❌ Selecione as bases numéricas!</string>
-    <string name="alerta_valor_invalido">❌ Valor inválido!</string>
-    <string name="alerta_bases_iguais">❌ Bases iguais selecionadas!</string>
-    <string name="alerta_deletar_dados">Deseja apagar o histórico de conversões?</string>
-    <string name="alerta_deletar_item">Deseja apagar este item do histórico?</string>
-    <string name="alerta_titulo_deletar_dados">⚠️Seu histórico será apagado!</string>
-    <string name="alerta_titulo_deletar_Item">⚠️Este item será apagado!</string>
-
-    <!--Textos Fragment de bases numéricas-->
-    <string name="entendi">Ok, endendi!</string>
-    <string name="oK">Ok</string>
-    <string name="cancelar">Cancelar</string>
-
     <string name="nav_header_subtitle">Selecione sua conversão</string>
-    <string name="Converter">Converter</string>
-    <string name="apagar_Histótico">Apagar Histórico</string>
-    <string name="resultado">Resultado</string>
-    <string name="Historico">Histórico de conversões</string>
-    <string name="lista_vazia">Nenhuma conversão realizada ainda!</string>
-
-    <!--Fragment passo a passo de bases numericas-->
-    <string name="copiar">Copiar</string>
-    <string name="txtMostrarResolucao">Resolução passo a passo</string>
-    <string name="toast_copiar_calculos">Copiando Cálculos</string>
-
-    <string name="input_value">Valor de entrada</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <!--Passo a passo cálculos-->
-    <string name="passo_hex_para_decimal">Converter valores HEXADECIMAIS para DECIMAIS</string>
-    <string name="passo_digito_convertido">%1$s ➨ %2$d</string>
-    <string name="passo_multiplicacao">Multiplique cada dígito (da esquerda para a direita) pela base numérica elevada ao número de dígitos. Decremente o expoente a cada dígito operado:</string>
-    <string name="passo_potencia_soma">( %1$d X %2$d&lt;sup&gt;&lt;small&gt;%3$d&lt;/small&gt;&lt;/sup&gt; ) + </string>
-    <string name="passo_potencia">( %1$d X %2$d&lt;sup&gt;&lt;small&gt;%3$d&lt;/small&gt;&lt;/sup&gt; )</string>
-    <string name="resultado_decimal">Resultado final: %1$d</string>
-    <string name="resultado_parcial_decimal">Decimal = %1$d</string>
-    <string name="passo_divisoes">Faça divisões sucessivas pela base de destino e pegue os restos</string>
-    <string name="passo_divisao_hex">%1$d ÷ %2$d = %3$d ➨ Resto: %4$d ➤ %5$s</string>
-    <string name="passo_divisao">%1$d ÷ %2$d = %3$d ➨ Resto: %4$d</string>
-    <string name="passo_leitura_restos">Leia os restos de baixo para cima</string>
-    <string name="resultado_final_string">Resultado final: %1$s</string>
-
-
-    <!--=============IPv4 STRINGS RESOURCES==============-->
-    <string-array name="modes">
-        <item>IP/CIDR</item>
-        <item>Máscaras</item>
-        <item>Hosts</item>
-        <item>VLSM</item>
-    </string-array>
-
-    <string name="ip_invalido">❌ Ip inválido!</string>
-    <string name="selecione_cidr">❌ Selecione um CIDR</string>
 
 </resources>
