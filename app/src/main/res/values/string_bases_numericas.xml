@@ -35,6 +35,7 @@
     <string name="lista_vazia">Nenhuma conversão realizada ainda!</string>
 
     <!--Textos da tela de passo a passo-->
+    <string name="txtConvPassoaPasso">Conversão passo a passo</string>
     <string name="txtMostrarResolucao">Resolução passo a passo</string>
 
     <!--Notificações-->

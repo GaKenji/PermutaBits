@@ -4,6 +4,7 @@
     <color name="purple_500">#FF6200EE</color>
     <color name="Azul">#3432C7</color>
     <color name="AzulExtraEscuro">#100F4D</color>
+    <color name="AzulExtraEscuro2">#04031A</color>
     <color name="AzulEscuro">#1E1C83</color>
     <color name="AzulClaro">#5D5AE6</color>
     <color name="CianoClaro">#37C4EF</color>
@@ -11,4 +12,5 @@
     <color name="black">#FF000000</color>
     <color name="CinzaEscuro">#232323</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="AzulBebeClaro">#B3E5FC</color>
 </resources>

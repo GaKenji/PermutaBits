@@ -8,6 +8,11 @@
         <item>VLSM</item>
     </string-array>
 
+    <!--Textos da tela-->
+    <string name="titilo_calculo_subnet">Cálculo Subnet</string>
+    <string name="ip_endereco">Endereço de IP</string>
+    <string name="resultadosIpv4Cidr">Informações Obtidas</string>
+
     <!--Alertas IP + CIDR-->
     <string name="ip_invalido">❌ Ip inválido!</string>
     <string name="selecione_cidr">❌ Selecione um CIDR</string>
@@ -16,6 +21,7 @@
     <string name="calculaSubnet">Calcular Subnet</string>
 
     <!--Notificações-->
+    <string name="network_info_texto_nulo">Nenhum texto encontrado!</string>
     <string name="network_info_copiado">Informações de Ip copiadas com sucesso!</string>
 
     <!--Resposta Network Info-->

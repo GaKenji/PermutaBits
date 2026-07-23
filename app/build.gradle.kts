@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
     implementation(libs.androidx.legacy.support.v4)
+
     implementation(libs.androidx.fragment.ktx)
     ksp(libs.androidx.room.compiler)
 
